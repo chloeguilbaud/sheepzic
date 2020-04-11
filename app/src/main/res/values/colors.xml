@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+
+    <!-- ********************************************* -->
+    <!--                 Components                    -->
+    <!-- ********************************************* -->
+
+    <!-- ActionButton -->
+
+    <color name="colorActionButtonEnabled">#AFAFAF</color>
+    <color name="colorActionButtonDisabled">#ECEFF1</color>
+    <color name="colorActionButtonDeactivateEnabled">#03A9F4</color>
+    <color name="colorActionButtonDeactivateDisabled">#5703A9F4</color>
+
 </resources>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- ********************************************* -->
+    <!--                 Components                    -->
+    <!-- ********************************************* -->
+
+    <!-- ActionButton -->
+    <declare-styleable name="ActionButton">
+        <attr name="actionButtonTitle" format="string"/>
+        <attr name="actionButtonActivatedIcon" format="reference"/>
+        <attr name="actionButtonDeactivatedIcon" format="reference"/>
+    </declare-styleable>
+
+
+</resources>

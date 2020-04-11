@@ -4,15 +4,73 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
     tools:context=".MainActivity">
 
-    <TextView
+    <TimePicker
+        android:id="@+id/timePicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        android:timePickerMode="spinner"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"
+        android:layout_marginBottom="16dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/timePicker"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.moustick.sheepzic.components.ActionButton
+            android:id="@+id/activity_main_actionbutton_airplanemode"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="?android:attr/selectableItemBackground"
+            app:actionButtonActivatedIcon="@drawable/ic_airplanemode_active_normal"
+            app:actionButtonDeactivatedIcon="@drawable/ic_airplanemode_inactive_normal"
+            app:actionButtonTitle="Mode Avion" />
+
+        <com.moustick.sheepzic.components.ActionButton
+            android:id="@+id/activity_main_actionbutton_wifi"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="?android:attr/selectableItemBackground"
+            app:actionButtonActivatedIcon="@drawable/ic_wifi_active_normal"
+            app:actionButtonDeactivatedIcon="@drawable/ic_wifi_inactive_normal"
+            app:actionButtonTitle="Wi-Fi" />
+
+        <com.moustick.sheepzic.components.ActionButton
+            android:id="@+id/activity_main_actionbutton_bluetooth"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="?android:attr/selectableItemBackground"
+            app:actionButtonActivatedIcon="@drawable/ic_bluetooth_active_normal"
+            app:actionButtonDeactivatedIcon="@drawable/ic_bluetooth_inactivate_normal"
+            app:actionButtonTitle="Bluetooth" />
+
+        <com.moustick.sheepzic.components.ActionButton
+            android:id="@+id/activity_main_actionbutton_sound"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="?android:attr/selectableItemBackground"
+            app:actionButtonActivatedIcon="@drawable/ic_volume_up_normal"
+            app:actionButtonDeactivatedIcon="@drawable/ic_volume_mute_normal"
+            app:actionButtonTitle="Son" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
