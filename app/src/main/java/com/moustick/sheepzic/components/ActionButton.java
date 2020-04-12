@@ -16,9 +16,9 @@ import com.moustick.sheepzic.R;
 public class ActionButton extends AppCompatButton {
 
     private Drawable normalIcon;
-    private Drawable deactivateIcon;
+    private Drawable selectedIcon;
 
-    private boolean deactivate = false;
+    private boolean selected = false;
     private boolean enabled = true;
 
     public ActionButton(Context context) {
@@ -51,7 +51,7 @@ public class ActionButton extends AppCompatButton {
 
             this.setText(typedArray.getString(R.styleable.ActionButton_actionButtonTitle));
             normalIcon = typedArray.getDrawable(R.styleable.ActionButton_actionButtonActivatedIcon);
-            deactivateIcon = typedArray.getDrawable(R.styleable.ActionButton_actionButtonDeactivatedIcon);
+            selectedIcon = typedArray.getDrawable(R.styleable.ActionButton_actionButtonDeactivatedIcon);
 
         }
 
@@ -61,12 +61,12 @@ public class ActionButton extends AppCompatButton {
 
     public void enable(boolean enable) {
         this.enabled = enable;
-        if(deactivate) {
+        if(selected) {
             if (enable)
-                setColor(R.color.colorActionButtonDeactivateEnabled, deactivateIcon);
+                setColor(R.color.colorActionButtonDeactivateEnabled, selectedIcon);
             else
-                setColor(R.color.colorActionButtonDeactivateDisabled, deactivateIcon);
-            setIcon(deactivateIcon);
+                setColor(R.color.colorActionButtonDeactivateDisabled, selectedIcon);
+            setIcon(selectedIcon);
         } else {
             if (enable)
                 setColor(R.color.colorActionButtonEnabled, normalIcon);
@@ -76,19 +76,27 @@ public class ActionButton extends AppCompatButton {
         }
     }
 
-    public void deactivate() {
-        this.deactivate = true;
+    public void select() {
+        this.selected = !this.selected;
         enable(enabled);
     }
 
-    public void activate() {
-        this.deactivate = false;
+    public void select(boolean select) {
+        this.selected = select;
         enable(enabled);
+    }
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
     }
 
     private void setColor(int colorId, @NonNull Drawable drawable) {
-        this.setTextColor(colorId);
-        drawable.setColorFilter(new PorterDuffColorFilter(colorId, PorterDuff.Mode.SRC_IN));
+        this.setTextColor(getResources().getColor(colorId));
+        drawable.setColorFilter(new PorterDuffColorFilter(getResources().getColor(colorId), PorterDuff.Mode.SRC_IN));
     }
 
     private void setIcon(@NonNull Drawable drawable) {

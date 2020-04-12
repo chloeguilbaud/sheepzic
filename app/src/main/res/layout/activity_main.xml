@@ -62,14 +62,14 @@
             app:actionButtonTitle="Bluetooth" />
 
         <com.moustick.sheepzic.components.ActionButton
-            android:id="@+id/activity_main_actionbutton_sound"
+            android:id="@+id/activity_main_actionbutton_mobileData"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="?android:attr/selectableItemBackground"
-            app:actionButtonActivatedIcon="@drawable/ic_volume_up_normal"
-            app:actionButtonDeactivatedIcon="@drawable/ic_volume_mute_normal"
-            app:actionButtonTitle="Son" />
+            app:actionButtonActivatedIcon="@drawable/ic_signal_cellular_on_normal"
+            app:actionButtonDeactivatedIcon="@drawable/ic_signal_cellular_off_normal"
+            app:actionButtonTitle="Données Mobiles" />
 
     </LinearLayout>
 
