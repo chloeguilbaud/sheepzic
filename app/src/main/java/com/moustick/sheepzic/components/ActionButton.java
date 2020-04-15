@@ -70,9 +70,9 @@ public class ActionButton extends AppCompatButton {
             setIcon(selectedIcon);
         } else {
             if (enable)
-                setColor(R.color.colorActionButtonEnabled, normalIcon);
+                setColor(R.color.colorDarkGrey, normalIcon);
             else
-                setColor(R.color.colorActionButtonDisabled, normalIcon);
+                setColor(R.color.colorLightGrey, normalIcon);
             setIcon(normalIcon);
         }
     }

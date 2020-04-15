@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void enableReset(final boolean enabled) {
         if (enabled) {
-            resetButton.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorDarkGrey)));
+            resetButton.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorBlack)));
         } else {
             resetButton.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorLightGrey)));
         }
