@@ -1,10 +1,10 @@
 package com.moustick.sheepzic;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.moustick.sheepzic.components.ActionButton;
@@ -14,6 +14,8 @@ public class MainActivity extends AppCompatActivity {
 
     private FloatingActionButton playButton;
     private boolean play = false;
+
+    private FloatingActionButton resetButton;
 
     private ActionButton airplanemodeButton;
     private ActionButton wifiButton;
@@ -26,18 +28,23 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         playButton = findViewById(R.id.activity_main_playButton);
+        resetButton = findViewById(R.id.activity_main_resetButton);
 
         airplanemodeButton = findViewById(R.id.activity_main_actionbutton_airplanemode);
         wifiButton = findViewById(R.id.activity_main_actionbutton_wifi);
         bluetoothButton = findViewById(R.id.activity_main_actionbutton_bluetooth);
         mobileDataButton = findViewById(R.id.activity_main_actionbutton_mobileData);
 
-        playButton.setOnClickListener((v) -> onPlayButtonClick());
+        playButton.setOnClickListener((v) -> onPlayButtonClick()); // TODO - disable if noting selected
+        resetButton.setOnClickListener((v) -> onResetButtonClick());
 
         airplanemodeButton.setOnClickListener((v) -> onAirplanemodeButtonClick());
         wifiButton.setOnClickListener((v -> onWifiButtonClick()));
         bluetoothButton.setOnClickListener((v -> onBluetoothButtonClick()));
         mobileDataButton.setOnClickListener((v -> onMobileDataButtonClick()));
+
+        // View initialisation
+        enableReset(false);
 
     }
 
@@ -46,11 +53,30 @@ public class MainActivity extends AppCompatActivity {
         if (play) {
             setPlayButtonIcon(R.drawable.ic_pause_normal, R.color.colorWhite, R.color.colorPrimary);
             enableActionButtons(false);
-        }
-        else {
+            enableReset(true);
+        } else {
             setPlayButtonIcon(R.drawable.ic_play_arrow_normal, R.color.colorPrimary, R.color.colorWhite);
             enableActionButtons(true);
         }
+    }
+
+    private void enableReset(final boolean enabled) {
+        if (enabled) {
+            resetButton.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorDarkGrey)));
+        } else {
+            resetButton.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorLightGrey)));
+        }
+        resetButton.setEnabled(enabled);
+    }
+
+    private void onResetButtonClick() {
+        // TODO - canReset :
+        //          - on TimePicking
+        //          - on playing
+        /*if (resetButton.isEnabled()) {
+            // TODO reset timePiker + clock
+            enableReset(false);
+        }*/
     }
 
     private void enableActionButtons(boolean enable) {
@@ -68,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void onAirplanemodeButtonClick() {
-        if(!airplanemodeButton.isSelected()) {
+        if (!airplanemodeButton.isSelected()) {
             airplanemodeButton.select(true);
             wifiButton.select(true);
             bluetoothButton.select(true);
