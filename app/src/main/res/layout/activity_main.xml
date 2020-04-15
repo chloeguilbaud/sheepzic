@@ -17,6 +17,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/activity_main_playButton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="24dp"
+        android:src="@drawable/ic_play_arrow_normal"
+        app:elevation="4dp"
+        app:fabCustomSize="48dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:maxImageSize="24dp"
+        app:pressedTranslationZ="0dp"
+        app:tint="@color/colorWhite" />
 
     <LinearLayout
         android:id="@+id/linearLayout"

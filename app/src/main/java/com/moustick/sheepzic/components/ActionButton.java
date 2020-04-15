@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
 
 import com.moustick.sheepzic.R;
+import com.moustick.sheepzic.utils.ColorHelper;
 
 public class ActionButton extends AppCompatButton {
 
@@ -55,7 +56,7 @@ public class ActionButton extends AppCompatButton {
 
         }
 
-        enable(true);
+        enable(true); // FIXME enable / disable click on button
 
     }
 
@@ -96,7 +97,7 @@ public class ActionButton extends AppCompatButton {
 
     private void setColor(int colorId, @NonNull Drawable drawable) {
         this.setTextColor(getResources().getColor(colorId));
-        drawable.setColorFilter(new PorterDuffColorFilter(getResources().getColor(colorId), PorterDuff.Mode.SRC_IN));
+        ColorHelper.setColor(getContext(), colorId, drawable);
     }
 
     private void setIcon(@NonNull Drawable drawable) {
