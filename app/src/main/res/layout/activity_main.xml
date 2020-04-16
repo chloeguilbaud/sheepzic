@@ -7,37 +7,35 @@
     android:focusableInTouchMode="true"
     tools:context=".MainActivity">
 
-    <TimePicker
-        android:id="@+id/timePicker"
+    <com.moustick.sheepzic.components.TimePicker
+        android:id="@+id/activity_main_timePicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:timePickerMode="spinner"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/activity_main_playButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/activity_main_resetButton"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_marginEnd="48dp"
-        android:layout_marginRight="48dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="8dp"
         android:src="@drawable/ic_restart_normal"
+        app:backgroundTint="@android:color/transparent"
         app:elevation="0dp"
         app:fabCustomSize="48dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toStartOf="@+id/activity_main_playButton"
         app:maxImageSize="24dp"
-        app:pressedTranslationZ="0dp"
-        app:backgroundTint="@android:color/transparent"/>
+        app:pressedTranslationZ="0dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/activity_main_playButton"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="8dp"
         android:src="@drawable/ic_play_arrow_normal"
         app:elevation="4dp"
         app:fabCustomSize="48dp"
@@ -49,17 +47,32 @@
         app:pressedTranslationZ="0dp"
         app:tint="@color/colorWhite" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/activity_main_volumeButton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="8dp"
+        android:src="@drawable/ic_volume_down_normal"
+        app:backgroundTint="@android:color/transparent"
+        app:elevation="0dp"
+        app:fabCustomSize="48dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintStart_toEndOf="@+id/activity_main_playButton"
+        app:maxImageSize="32dp"
+        app:pressedTranslationZ="0dp" />
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_marginLeft="6dp"
         android:layout_marginRight="6dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/timePicker"
+        app:layout_constraintEnd_toStartOf="@+id/activity_main_timePicker"
         app:layout_constraintStart_toStartOf="parent">
 
         <com.moustick.sheepzic.components.ActionButton

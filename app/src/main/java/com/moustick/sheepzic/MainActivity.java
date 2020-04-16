@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean play = false;
 
     private FloatingActionButton resetButton;
+    private FloatingActionButton volumeButton;
 
     private ActionButton airplanemodeButton;
     private ActionButton wifiButton;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
         playButton = findViewById(R.id.activity_main_playButton);
         resetButton = findViewById(R.id.activity_main_resetButton);
+        volumeButton = findViewById(R.id.activity_main_volumeButton);
 
         airplanemodeButton = findViewById(R.id.activity_main_actionbutton_airplanemode);
         wifiButton = findViewById(R.id.activity_main_actionbutton_wifi);
@@ -37,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
         playButton.setOnClickListener((v) -> onPlayButtonClick()); // TODO - disable if noting selected
         resetButton.setOnClickListener((v) -> onResetButtonClick());
+        volumeButton.setOnClickListener((v) -> onVolumeButtonClick());
 
         airplanemodeButton.setOnClickListener((v) -> onAirplanemodeButtonClick());
         wifiButton.setOnClickListener((v -> onWifiButtonClick()));
@@ -77,6 +80,10 @@ public class MainActivity extends AppCompatActivity {
             // TODO reset timePiker + clock
             enableReset(false);
         }*/
+    }
+
+    private void onVolumeButtonClick() {
+        // TODO
     }
 
     private void enableActionButtons(boolean enable) {
