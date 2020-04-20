@@ -21,5 +21,6 @@
     <color name="colorActionButtonDisabled">#DAD9D9</color>
     <color name="colorActionButtonDeactivateEnabled">@color/colorPrimary</color>
     <color name="colorActionButtonDeactivateDisabled">@color/colorPrimaryLight</color>
+    <color name="playButtonDisableBackground">#A3D5FF</color>
 
 </resources>

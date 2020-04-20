@@ -30,20 +30,20 @@ public class TimePicker extends LinearLayout {
 
     public TimePicker(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        init(attrs);
+        create(attrs);
     }
 
     public TimePicker(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init(attrs);
+        create(attrs);
     }
 
     public TimePicker(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        init(attrs);
+        create(attrs);
     }
 
-    private void init(final @Nullable AttributeSet attrs) {
+    private void create(final @Nullable AttributeSet attrs) {
 
         // View initialisation
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -52,11 +52,15 @@ public class TimePicker extends LinearLayout {
         numberPickerHour = findViewById(R.id.component_timePicker_numberPicker_hours);
         numberPickerMin = findViewById(R.id.component_timePicker_numberPicker_minutes);
         numberPickerSec = findViewById(R.id.component_timePicker_numberPicker_seconds);
+
+        init();
+
+    }
+
+    private void init() {
         initNumberPicker(numberPickerHour, minHour, maxHour);
         initNumberPicker(numberPickerMin, minMinute, maxMinute);
         initNumberPicker(numberPickerSec, minSecond, maxSecond);
-
-
     }
 
     private void initNumberPicker(NumberPicker numberPicker, int min, int max) {
@@ -64,6 +68,20 @@ public class TimePicker extends LinearLayout {
         numberPicker.setMinValue(min);
         numberPicker.setMaxValue(max - 1);
         numberPicker.setValue(min);
+    }
+
+    public void reset() {
+        init();
+    }
+
+    public boolean hasValue() {
+        return getHours() != 0 || getMinutes() != 0 || getSeconds() != 0;
+    }
+
+    public void setOnTimeChangeListener(OnTimeChangeListener onTimeChangeListener) {
+        numberPickerHour.setOnValueChangedListener((picker, oldVal, newVal) -> onTimeChangeListener.onTimeChange(oldVal, newVal));
+        numberPickerMin.setOnValueChangedListener((picker, oldVal, newVal) -> onTimeChangeListener.onTimeChange(oldVal, newVal));
+        numberPickerSec.setOnValueChangedListener((picker, oldVal, newVal) -> onTimeChangeListener.onTimeChange(oldVal, newVal));
     }
 
     public int getSeconds() {
@@ -88,6 +106,10 @@ public class TimePicker extends LinearLayout {
 
     public void setHours(int hour) {
         numberPickerHour.setValue(hour);
+    }
+
+    public interface OnTimeChangeListener {
+        void onTimeChange(int oldValue, int newValue);
     }
 
 }

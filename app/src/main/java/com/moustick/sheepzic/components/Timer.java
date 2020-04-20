@@ -33,31 +33,31 @@ public class Timer extends LinearLayout {
     private int currentHour;
     private int currentMinute;
     private int currentSecond;
-    private onFinishEventHandler currentOnFinishEventHandler;
+    private onFinishListener currentOnFinishListener;
 
     private CountDownTimer countDownTimer;
 
     public Timer(Context context) {
         super(context);
-        init(null);
+        create(null);
     }
 
     public Timer(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        init(attrs);
+        create(attrs);
     }
 
     public Timer(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init(attrs);
+        create(attrs);
     }
 
     public Timer(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        init(attrs);
+        create(attrs);
     }
 
-    private void init(AttributeSet attrs) {
+    private void create(AttributeSet attrs) {
 
         // View initialisation
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -68,15 +68,11 @@ public class Timer extends LinearLayout {
         secondsView = findViewById(R.id.component_countDownTimer_seconds);
 
         // Time initialisation
-        currentHour = minHour;
-        currentMinute = minMinute;
-        currentSecond = minSecond;
-
         hours = SuiteHelper.generate(minHour, maxHour);
         minutes = SuiteHelper.generate(minMinute, maxMinute);
         seconds = SuiteHelper.generate(minSecond, maxSecond);
 
-        updateView();
+        init();
 
     }
 
@@ -87,15 +83,15 @@ public class Timer extends LinearLayout {
     }
 
     public void setTimer() {
-        setTimer(currentHour, currentMinute, currentSecond, currentOnFinishEventHandler);
+        setTimer(currentHour, currentMinute, currentSecond, currentOnFinishListener);
     }
 
-    public void setTimer(final int hour, final int minute, final int second, final onFinishEventHandler onFinishEventHandler) {
+    public void setTimer(final int hour, final int minute, final int second, final onFinishListener onFinishListener) {
 
         currentHour = hour;
         currentMinute = minute;
         currentSecond = second;
-        currentOnFinishEventHandler = onFinishEventHandler;
+        currentOnFinishListener = onFinishListener;
         updateView();
 
         int countDownTimeMillis = currentSecond * 1000 + currentMinute * 60 * 1000 + currentHour * 60 * 60 * 1000;
@@ -111,7 +107,7 @@ public class Timer extends LinearLayout {
             }
 
             public void onFinish() {
-                onFinishEventHandler.handleFinish();
+                onFinishListener.onFinish();
             }
         };
     }
@@ -119,16 +115,12 @@ public class Timer extends LinearLayout {
     public void start() {
         if (countDownTimer != null) {
             countDownTimer.start();
-        } else {
-            throw new RuntimeException("Timer must be initialised with it's setTimer() method before started.");
         }
     }
 
     public void pause() {
         if (countDownTimer != null) {
             countDownTimer.cancel();
-        } else {
-            throw new RuntimeException("Do you seriously think you can pause a Timer that you haven't initialised with it's setTimer() method?");
         }
     }
 
@@ -136,20 +128,28 @@ public class Timer extends LinearLayout {
         if (countDownTimer != null) {
             setTimer();
             start();
-        } else {
-            throw new RuntimeException("Do you seriously think you can resume a Timer that you haven't even initialised? Please create it thanks to it's setTimer() method before doing anything else to this poor thing.");
         }
     }
 
     public void finish() {
         if (countDownTimer != null) {
             countDownTimer.cancel();
-        } else {
-            throw new RuntimeException("Do you seriously think you can stop something that has't started ? Please create the Timer thanks to it's setTimer() method before doing anything else to him.");
         }
     }
 
-    public interface onFinishEventHandler {
-        void handleFinish();
+    private void init() {
+        currentHour = minHour;
+        currentMinute = minMinute;
+        currentSecond = minSecond;
+        updateView();
+    }
+
+    public void reset() {
+        finish();
+        init();
+    }
+
+    public interface onFinishListener {
+        void onFinish();
     }
 }

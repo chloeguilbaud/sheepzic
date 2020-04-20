@@ -3,7 +3,8 @@ package com.moustick.sheepzic;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.CountDownTimer;
+import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,6 +13,8 @@ import com.moustick.sheepzic.components.ActionButton;
 import com.moustick.sheepzic.components.TimePicker;
 import com.moustick.sheepzic.components.Timer;
 import com.moustick.sheepzic.utils.ColorHelper;
+
+import static android.view.View.GONE;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,8 +30,8 @@ public class MainActivity extends AppCompatActivity {
     private Timer timer;
     private TimePicker timePicker;
 
-    private boolean play = false;
-    private boolean timerOn = false;
+    private boolean play;
+    private boolean timerOn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +50,9 @@ public class MainActivity extends AppCompatActivity {
         bluetoothButton = findViewById(R.id.activity_main_actionbutton_bluetooth);
         mobileDataButton = findViewById(R.id.activity_main_actionbutton_mobileData);
 
-        playButton.setOnClickListener((v) -> onPlayButtonClick()); // TODO - disable if noting selected
+        timePicker.setOnTimeChangeListener((oldValue, newValue) -> onTimeSelect());
+
+        playButton.setOnClickListener((v) -> onPlayButtonClick());
         resetButton.setOnClickListener((v) -> onResetButtonClick());
         volumeButton.setOnClickListener((v) -> onVolumeButtonClick());
 
@@ -57,28 +62,87 @@ public class MainActivity extends AppCompatActivity {
         mobileDataButton.setOnClickListener((v -> onMobileDataButtonClick()));
 
         // View initialisation
-        enableReset(false);
+        init();
 
     }
 
-    private void onPlayButtonClick() {
-        play = !play;
-        if (play) { // Start the count down countDownTimer
-            setPlayButtonIcon(R.drawable.ic_pause_normal, R.color.colorWhite, R.color.colorPrimary);
-            enableActionButtons(false);
+    private void init() {
+        enablePlay(false);
+        enableReset(false);
+        timerOn = false;
+        play = false;
+    }
+
+    private void onTimeSelect() {
+        // Toast.makeText(this, "" + timePicker.getHours() + ":" + timePicker.getMinutes() + ":" + timePicker.getSeconds(), Toast.LENGTH_SHORT).show();
+        if (timePicker.hasValue()) {
+            enablePlay(true);
             enableReset(true);
-            if (!timerOn) {
-                startTimer();
-            } else {
-                resumeTimer();
-            }
-        } else { // Pause the countDownTimer
-            setPlayButtonIcon(R.drawable.ic_play_arrow_normal, R.color.colorPrimary, R.color.colorWhite);
-            enableActionButtons(true);
-            if (timerOn) {
-                pauseTimer();
+        } else {
+            enablePlay(false);
+            enableReset(false);
+        }
+    }
+
+    private void onPlayButtonClick() {
+        if (timePicker.hasValue()) {
+            play = !play;
+            if (play) { // Start the count down countDownTimer
+                play();
+            } else { // Pause the countDownTimer
+                pause();
             }
         }
+    }
+
+    private void play() {
+        // Disable action buttons
+        enableActionButtons(false);
+        // Enable reset button
+        enableReset(true);
+        // Display pause button
+        setPauseButton();
+        // Hide time picker
+        timePicker.setVisibility(GONE);
+        // Manage timer
+        if (!timerOn) { // Start timer if it is off
+            startTimer();
+        } else { // Pause timer if it was not off yet
+            resumeTimer();
+        }
+    }
+
+    private void pause() {
+        // Enable action buttons
+        enableActionButtons(true);
+        // Display play button
+        setEnabledPlayButton();
+        // If timer is on, then pause it
+        if (timerOn) {
+            pauseTimer();
+        }
+    }
+
+    private void onResetButtonClick() {
+        reset();
+    }
+
+    private void reset() {
+        // Stop timer and reset it
+        timer.reset();
+        // Reset time picker to zero
+        timePicker.setVisibility(View.VISIBLE);
+        timePicker.reset();
+        // Enable action buttons again
+        enableActionButtons(true);
+        // Display play button
+        setEnabledPlayButton();
+        // Enable play button, disable the reset button and set timeOn and play booleans to false
+        init();
+    }
+
+    private void onVolumeButtonClick() {
+        // TODO
     }
 
     private void startTimer() {
@@ -98,32 +162,33 @@ public class MainActivity extends AppCompatActivity {
         timer.resume();
     }
 
-    private void finishTimer() {
-        timer.finish();
-        timerOn = false;
+    private void enablePlay(boolean enabled) {
+        if (enabled) {
+            setEnabledPlayButton();
+        } else {
+            setDisabledPlayButton();
+        }
     }
 
-    private void enableReset(final boolean enabled) {
+    private void setDisabledPlayButton() {
+        setPlayButtonIcon(R.drawable.ic_play_arrow_normal, R.color.playButtonDisableBackground, R.color.colorActionButtonDeactivateDisabled);
+    }
+
+    private void setPauseButton() {
+        setPlayButtonIcon(R.drawable.ic_pause_normal, R.color.colorWhite, R.color.colorPrimary);
+    }
+
+    private void setEnabledPlayButton() {
+        setPlayButtonIcon(R.drawable.ic_play_arrow_normal, R.color.colorPrimary, R.color.colorWhite);
+    }
+
+    private void enableReset(boolean enabled) {
         if (enabled) {
             resetButton.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorBlack)));
         } else {
             resetButton.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorLightGrey)));
         }
         resetButton.setEnabled(enabled);
-    }
-
-    private void onResetButtonClick() {
-        // TODO - canReset :
-        //          - on TimePicking
-        //          - on playing
-        /*if (resetButton.isEnabled()) {
-            // TODO reset timePiker + clock
-            enableReset(false);
-        }*/
-    }
-
-    private void onVolumeButtonClick() {
-        // TODO
     }
 
     private void enableActionButtons(boolean enable) {
@@ -133,11 +198,14 @@ public class MainActivity extends AppCompatActivity {
         mobileDataButton.enable(enable);
     }
 
-    private void setPlayButtonIcon(int iconRef, int iconColorRef, int backgroundColorRef) {
+    private void setButtonIcon(FloatingActionButton button, int iconRef, int iconColorRef, int backgroundColorRef) {
         Drawable drawable = getResources().getDrawable(iconRef);
-        playButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(iconColorRef)));
+        button.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(iconColorRef)));
         ColorHelper.setColor(getApplicationContext(), backgroundColorRef, drawable);
-        playButton.setImageDrawable(drawable);
+        button.setImageDrawable(drawable);
+    }
+    private void setPlayButtonIcon(int iconRef, int iconColorRef, int backgroundColorRef) {
+        setButtonIcon(playButton, iconRef, iconColorRef, backgroundColorRef);
     }
 
     private void onAirplanemodeButtonClick() {
