@@ -3,18 +3,19 @@ package com.moustick.sheepzic;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.moustick.sheepzic.components.ActionButton;
+import com.moustick.sheepzic.components.TimePicker;
+import com.moustick.sheepzic.components.Timer;
 import com.moustick.sheepzic.utils.ColorHelper;
 
 public class MainActivity extends AppCompatActivity {
 
     private FloatingActionButton playButton;
-    private boolean play = false;
-
     private FloatingActionButton resetButton;
     private FloatingActionButton volumeButton;
 
@@ -23,10 +24,19 @@ public class MainActivity extends AppCompatActivity {
     private ActionButton bluetoothButton;
     private ActionButton mobileDataButton;
 
+    private Timer timer;
+    private TimePicker timePicker;
+
+    private boolean play = false;
+    private boolean timerOn = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        timer = findViewById(R.id.activity_main_timer);
+        timePicker = findViewById(R.id.activity_main_timePicker);
 
         playButton = findViewById(R.id.activity_main_playButton);
         resetButton = findViewById(R.id.activity_main_resetButton);
@@ -53,14 +63,44 @@ public class MainActivity extends AppCompatActivity {
 
     private void onPlayButtonClick() {
         play = !play;
-        if (play) {
+        if (play) { // Start the count down countDownTimer
             setPlayButtonIcon(R.drawable.ic_pause_normal, R.color.colorWhite, R.color.colorPrimary);
             enableActionButtons(false);
             enableReset(true);
-        } else {
+            if (!timerOn) {
+                startTimer();
+            } else {
+                resumeTimer();
+            }
+        } else { // Pause the countDownTimer
             setPlayButtonIcon(R.drawable.ic_play_arrow_normal, R.color.colorPrimary, R.color.colorWhite);
             enableActionButtons(true);
+            if (timerOn) {
+                pauseTimer();
+            }
         }
+    }
+
+    private void startTimer() {
+        int hours = timePicker.getHours();
+        int minutes = timePicker.getMinutes();
+        int seconds = timePicker.getSeconds();
+        timer.setTimer(hours, minutes, seconds, this::onTimerFinish);
+        timer.start();
+        timerOn = true;
+    }
+
+    private void pauseTimer() {
+        timer.pause();
+    }
+
+    private void resumeTimer() {
+        timer.resume();
+    }
+
+    private void finishTimer() {
+        timer.finish();
+        timerOn = false;
     }
 
     private void enableReset(final boolean enabled) {
@@ -121,6 +161,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void onMobileDataButtonClick() {
         mobileDataButton.select();
+    }
+
+    private void onTimerFinish() {
+
     }
 
 }

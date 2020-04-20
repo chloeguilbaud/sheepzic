@@ -7,6 +7,15 @@
     android:focusableInTouchMode="true"
     tools:context=".MainActivity">
 
+    <com.moustick.sheepzic.components.Timer
+        android:id="@+id/activity_main_timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.moustick.sheepzic.components.TimePicker
         android:id="@+id/activity_main_timePicker"
         android:layout_width="wrap_content"

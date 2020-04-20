@@ -3,18 +3,20 @@ package com.moustick.sheepzic.components;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.moustick.sheepzic.MainActivity;
 import com.moustick.sheepzic.R;
+import com.moustick.sheepzic.utils.SuiteHelper;
 
-import java.util.ArrayList;
+import static com.moustick.sheepzic.components.Timer.maxHour;
+import static com.moustick.sheepzic.components.Timer.maxMinute;
+import static com.moustick.sheepzic.components.Timer.maxSecond;
+import static com.moustick.sheepzic.components.Timer.minHour;
+import static com.moustick.sheepzic.components.Timer.minMinute;
+import static com.moustick.sheepzic.components.Timer.minSecond;
 
 public class TimePicker extends LinearLayout {
 
@@ -47,35 +49,45 @@ public class TimePicker extends LinearLayout {
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.component_time_picker, this);
 
-        numberPickerHour = findViewById(R.id.numpicker_hours);
-        numberPickerMin = findViewById(R.id.numpicker_minutes);
-        numberPickerSec = findViewById(R.id.numpicker_seconds);
-        initNumberPicker(numberPickerHour, 0, 100);
-        initNumberPicker(numberPickerMin, 0, 60);
-        initNumberPicker(numberPickerSec, 0, 60);
+        numberPickerHour = findViewById(R.id.component_timePicker_numberPicker_hours);
+        numberPickerMin = findViewById(R.id.component_timePicker_numberPicker_minutes);
+        numberPickerSec = findViewById(R.id.component_timePicker_numberPicker_seconds);
+        initNumberPicker(numberPickerHour, minHour, maxHour);
+        initNumberPicker(numberPickerMin, minMinute, maxMinute);
+        initNumberPicker(numberPickerSec, minSecond, maxSecond);
 
 
     }
 
     private void initNumberPicker(NumberPicker numberPicker, int min, int max) {
-
-        String[] data = new String[max];
-        if (max > 10) {
-            for (int i = min; i < 10; i++) {
-                data[i] = "0" + i;
-            }
-            for (int i = 10; i < max; i++) {
-                data[i] = "" + i;
-            }
-        } else {
-            for (int i = min; i < max; i++) {
-                data[i] = "0" + i;
-            }
-        }
-        numberPicker.setDisplayedValues(data);
+        numberPicker.setDisplayedValues(SuiteHelper.generate(min, max));
         numberPicker.setMinValue(min);
         numberPicker.setMaxValue(max - 1);
         numberPicker.setValue(min);
+    }
+
+    public int getSeconds() {
+        return numberPickerSec.getValue();
+    }
+
+    public int getMinutes() {
+        return numberPickerMin.getValue();
+    }
+
+    public int getHours() {
+        return numberPickerHour.getValue();
+    }
+
+    public void setSeconds(int second) {
+        numberPickerSec.setValue(second);
+    }
+
+    public void setMinutes(int minute) {
+        numberPickerMin.setValue(minute);
+    }
+
+    public void setHours(int hour) {
+        numberPickerHour.setValue(hour);
     }
 
 }
