@@ -2,7 +2,7 @@
 <resources>
 
     <color name="colorPrimary">#03A9F4</color>
-    <color name="colorPrimaryLight">#5703A9F4</color>
+    <color name="colorPrimaryLight">#c3ecff</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">@color/colorPrimary</color>
 
@@ -21,6 +21,6 @@
     <color name="colorActionButtonDisabled">#DAD9D9</color>
     <color name="colorActionButtonDeactivateEnabled">@color/colorPrimary</color>
     <color name="colorActionButtonDeactivateDisabled">@color/colorPrimaryLight</color>
-    <color name="playButtonDisableBackground">#A3D5FF</color>
+    <color name="playButtonDisableBackground">#9ee1fe</color>
 
 </resources>
