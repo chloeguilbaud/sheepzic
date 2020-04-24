@@ -1,8 +1,13 @@
 package com.moustick.sheepzic;
 
+import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.View;
 import android.widget.Toast;
 
@@ -13,10 +18,13 @@ import com.moustick.sheepzic.components.ActionButton;
 import com.moustick.sheepzic.components.TimePicker;
 import com.moustick.sheepzic.components.Timer;
 import com.moustick.sheepzic.utils.ColorHelper;
+import com.moustick.sheepzic.utils.NetworkUtils;
 
 import static android.view.View.GONE;
 
 public class MainActivity extends AppCompatActivity {
+
+    private Context context;
 
     private FloatingActionButton playButton;
     private FloatingActionButton resetButton;
@@ -37,6 +45,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        context = getApplicationContext();
+
+        /*ConnectivityManager connectivityManager = (ConnectivityManager) this.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        connectivityManager.getAllNetworkInfo()[0].isConnected();*/
 
         timer = findViewById(R.id.activity_main_timer);
         timePicker = findViewById(R.id.activity_main_timePicker);
@@ -201,7 +213,7 @@ public class MainActivity extends AppCompatActivity {
     private void setButtonIcon(FloatingActionButton button, int iconRef, int iconColorRef, int backgroundColorRef) {
         Drawable drawable = getResources().getDrawable(iconRef);
         button.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(iconColorRef)));
-        ColorHelper.setColor(getApplicationContext(), backgroundColorRef, drawable);
+        ColorHelper.setColor(context, backgroundColorRef, drawable);
         button.setImageDrawable(drawable);
     }
     private void setPlayButtonIcon(int iconRef, int iconColorRef, int backgroundColorRef) {
@@ -209,6 +221,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void onAirplanemodeButtonClick() {
+        //Settings.Global.putString(getContentResolver(), "airplane_mode_on", "1");
+        // Asking for air plane mode deactivation after time out
         if (!airplanemodeButton.isSelected()) {
             airplanemodeButton.select(true);
             wifiButton.select(true);
@@ -225,13 +239,21 @@ public class MainActivity extends AppCompatActivity {
 
     private void onBluetoothButtonClick() {
         bluetoothButton.select();
+
     }
 
     private void onMobileDataButtonClick() {
         mobileDataButton.select();
+        //NetworkUtils.mobileDataEnabled(context, false);
     }
 
     private void onTimerFinish() {
+        if (wifiButton.isSelected())
+            NetworkUtils.wifiEnabled(context, false);
+        if (mobileDataButton.isSelected())
+
+        if (bluetoothButton.isSelected())
+            NetworkUtils.bluetoothEnabled(false);
 
     }
 
