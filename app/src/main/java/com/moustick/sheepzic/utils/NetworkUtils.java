@@ -4,11 +4,14 @@ import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.wifi.WifiManager;
+import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Objects;
 
 public class NetworkUtils {
 
@@ -21,6 +24,42 @@ public class NetworkUtils {
             return false;
         }
     }
+
+    // TODO - to explore
+    /*public static void setMobileDataEnabled(Context context, boolean enabled) throws ClassNotFoundException, NoSuchFieldException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
+        final ConnectivityManager conman = (ConnectivityManager)  context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        final Class conmanClass = Class.forName(conman.getClass().getName());
+        final Field connectivityManagerField = conmanClass.getDeclaredField("mService");
+        connectivityManagerField.setAccessible(true);
+        final Object connectivityManager = connectivityManagerField.get(conman);
+        final Class connectivityManagerClass =  Class.forName(connectivityManager.getClass().getName());
+        final Method setMobileDataEnabledMethod = connectivityManagerClass.getDeclaredMethod("setMobileDataEnabled", Boolean.TYPE);
+        setMobileDataEnabledMethod.setAccessible(true);
+
+        setMobileDataEnabledMethod.invoke(connectivityManager, enabled);
+    }
+
+    public static void setMobileDataState(Context context, boolean mobileDataEnabled) {
+        try {
+            TelephonyManager telephonyService = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            Method setMobileDataEnabledMethod = Objects.requireNonNull(telephonyService).getClass().getDeclaredMethod("setDataEnabled", boolean.class);
+            setMobileDataEnabledMethod.invoke(telephonyService, mobileDataEnabled);
+        } catch (Exception ex) {
+            System.out.println("MobileData Error setting mobile data state ;)");
+            Log.e("MainActivity", "Error setting mobile data state", ex);
+        }
+    }
+    public static boolean getMobileDataState(Context context) {
+        try {
+            TelephonyManager telephonyService = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            Method getMobileDataEnabledMethod = Objects.requireNonNull(telephonyService).getClass().getDeclaredMethod("getDataEnabled");
+            return (boolean) (Boolean) getMobileDataEnabledMethod.invoke(telephonyService);
+        } catch (Exception ex) {
+            Log.e("MainActivity", "Error getting mobile data state", ex);
+        }
+        return false;
+    }
+
     public static boolean mobileDataEnabled(Context context, boolean enabled) {
         Toast.makeText(context, "MSG", Toast.LENGTH_LONG).show();
         boolean res = false;
@@ -48,7 +87,7 @@ public class NetworkUtils {
             e.printStackTrace();
         }
         return res;
-    }
+    }*/
 
     public static boolean bluetoothEnabled(boolean enabled) {
         BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();

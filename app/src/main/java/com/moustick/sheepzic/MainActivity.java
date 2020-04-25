@@ -20,6 +20,8 @@ import com.moustick.sheepzic.components.Timer;
 import com.moustick.sheepzic.utils.ColorHelper;
 import com.moustick.sheepzic.utils.NetworkUtils;
 
+import java.lang.reflect.InvocationTargetException;
+
 import static android.view.View.GONE;
 
 public class MainActivity extends AppCompatActivity {
@@ -244,6 +246,31 @@ public class MainActivity extends AppCompatActivity {
 
     private void onMobileDataButtonClick() {
         mobileDataButton.select();
+        /*try {
+            NetworkUtils.setMobileDataEnabled(context, false);
+            Toast.makeText(context, "MobileData OK ;)" , Toast.LENGTH_LONG).show();
+            System.out.println("MobileData OK ;)");
+        } catch (ClassNotFoundException e) {
+            Toast.makeText(context, "MobileData ClassNotFoundException" , Toast.LENGTH_LONG).show();
+            System.out.println("MobileData ClassNotFoundException ;)");
+            e.printStackTrace();
+        } catch (NoSuchFieldException e) {
+            Toast.makeText(context, "MobileData NoSuchFieldException", Toast.LENGTH_LONG).show();
+            System.out.println("MobileData NoSuchFieldException ;)");
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            Toast.makeText(context, "MobileData IllegalAccessException", Toast.LENGTH_LONG).show();
+            System.out.println("MobileData IllegalAccessException ;)");
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            Toast.makeText(context, "MobileData NoSuchMethodException", Toast.LENGTH_LONG).show();
+            System.out.println("MobileData NoSuchMethodException ;)");
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            Toast.makeText(context, "MobileData InvocationTargetException", Toast.LENGTH_LONG).show();
+            System.out.println("MobileData InvocationTargetException ;)");
+            e.printStackTrace();
+        }*/
         //NetworkUtils.mobileDataEnabled(context, false);
     }
 
