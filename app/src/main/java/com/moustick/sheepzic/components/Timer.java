@@ -5,6 +5,7 @@ import android.os.CountDownTimer;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -12,11 +13,16 @@ import androidx.annotation.Nullable;
 import com.moustick.sheepzic.R;
 import com.moustick.sheepzic.utils.SuiteHelper;
 
+// TODO - mettre en place du ViewModel et LiveData
 public class Timer extends LinearLayout {
 
-    private TextView hoursView;
-    private TextView minutesView;
-    private TextView secondsView;
+    private TextView hoursValueView;
+    private TextView minutesValueView;
+    private TextView secondsValueView;
+
+    private ProgressBar hoursProgressBarView;
+    private ProgressBar minutesProgressBarView;
+    private ProgressBar secondsProgressBarView;
 
     public static final int minMinute = 0;
     public static final int minSecond = 0;
@@ -61,11 +67,15 @@ public class Timer extends LinearLayout {
 
         // View initialisation
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.component_count_down_timer, this);
+        inflater.inflate(R.layout.component_timer, this);
 
-        hoursView = findViewById(R.id.component_countDownTimer_hours);
-        minutesView = findViewById(R.id.component_countDownTimer_minutes);
-        secondsView = findViewById(R.id.component_countDownTimer_seconds);
+        hoursValueView = findViewById(R.id.component_countDownTimer_hours);
+        minutesValueView = findViewById(R.id.component_countDownTimer_minutes);
+        secondsValueView = findViewById(R.id.component_countDownTimer_seconds);
+
+        hoursProgressBarView = findViewById(R.id.component_countDownTimer_progressbar_hours);
+        minutesProgressBarView = findViewById(R.id.component_countDownTimer_progressbar_minutes);
+        secondsProgressBarView = findViewById(R.id.component_countDownTimer_progressbar_seconds);
 
         // Time initialisation
         hours = SuiteHelper.generate(minHour, maxHour);
@@ -77,9 +87,20 @@ public class Timer extends LinearLayout {
     }
 
     private void updateView() {
-        hoursView.setText(hours[currentHour]);
-        minutesView.setText(minutes[currentMinute]);
-        secondsView.setText(seconds[currentSecond]);
+        updateTimerValueView();
+        updateProgressBarView(currentHour, currentMinute, currentSecond);
+    }
+
+    private void updateTimerValueView() {
+        hoursValueView.setText(hours[currentHour]);
+        minutesValueView.setText(minutes[currentMinute]);
+        secondsValueView.setText(seconds[currentSecond]);
+    }
+
+    private void updateProgressBarView(int hour, int minute, int second) {
+        hoursProgressBarView.setProgress(hour);
+        minutesProgressBarView.setProgress(minute);
+        secondsProgressBarView.setProgress(second);
     }
 
     public void setTimer() {
@@ -141,7 +162,23 @@ public class Timer extends LinearLayout {
         currentHour = minHour;
         currentMinute = minMinute;
         currentSecond = minSecond;
-        updateView();
+        initProgressBarView();
+        updateTimerValueView();
+    }
+
+    private void initProgressBarView() {
+        updateProgressBarView(1, 1, 1);
+        //hoursProgressBarView.setBackground(getResources().getDrawable(R.drawable.ic_component_timer_progressbarbackgroundhours, getContext().getTheme()));
+        //minutesProgressBarView.setBackground(getResources().getDrawable(R.drawable.ic_component_timer_progressbarbackgroundminutes, getContext().getTheme()));
+        secondsProgressBarView.setBackground(getResources().getDrawable(R.drawable.ic_component_timer_progressbarbackgroundseconds, getContext().getTheme()));
+    }
+
+    private void setProgressBarsBackgroundColor(ProgressBar progressBar, boolean enableBackground) {
+        if (enableBackground)
+            progressBar.setBackground(getResources().getDrawable(R.drawable.ic_component_timer_progressbarbackgroundseconds, getContext().getTheme()));
+        else
+            progressBar.setBackground(null);
+
     }
 
     public void reset() {

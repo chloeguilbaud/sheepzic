@@ -7,6 +7,9 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/colorBackgroundPrimary</item>
+        <item name="android:textColor">@color/colorTextWhite</item>
+        <!--<item name="android:background">@color/colorBackgroundPrimary</item>-->
     </style>
 
     <style name="Sheepzic"/>
@@ -18,9 +21,19 @@
     </style>
 
     <style name="Sheepzic.Component.NumberPickerDivider">
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:textStyle">bold</item>
     </style>
+
+    <style name="Sheepzic.Component.TimerValueDivider">
+        <item name="android:textSize">25sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Sheepzic.Component.TimerValue">
+        <item name="android:textSize">25sp</item>
+    </style>
+
 
 
 </resources>

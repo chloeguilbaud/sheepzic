@@ -3,9 +3,15 @@
 
     <color name="colorPrimary">#03A9F4</color>
     <color name="colorPrimaryLight">#c3ecff</color>
-    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorPrimaryDark">#222431</color>
     <color name="colorAccent">@color/colorPrimary</color>
 
+    <color name="colorBackgroundPrimary">#222431</color>
+    <color name="colorBackgroundLight">#4a4c5a</color>
+    <color name="colorBackgroundDark">#000009</color>
+
+    <color name="colorTextWhite">#f3f6ff</color>
+    <color name="colorTimerWhite">#f3f6ff</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlack">#000000</color>
     <color name="colorDarkGrey">#696969</color>
