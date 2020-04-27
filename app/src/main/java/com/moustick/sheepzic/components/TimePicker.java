@@ -47,7 +47,7 @@ public class TimePicker extends LinearLayout {
 
         // View initialisation
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.component_time_picker, this);
+        inflater.inflate(R.layout.component_timepicker, this);
 
         numberPickerHour = findViewById(R.id.component_timePicker_numberPicker_hours);
         numberPickerMin = findViewById(R.id.component_timePicker_numberPicker_minutes);

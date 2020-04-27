@@ -223,7 +223,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void onAirplanemodeButtonClick() {
-        //Settings.Global.putString(getContentResolver(), "airplane_mode_on", "1");
         // Asking for air plane mode deactivation after time out
         if (!airplanemodeButton.isSelected()) {
             airplanemodeButton.select(true);
@@ -246,42 +245,15 @@ public class MainActivity extends AppCompatActivity {
 
     private void onMobileDataButtonClick() {
         mobileDataButton.select();
-        /*try {
-            NetworkUtils.setMobileDataEnabled(context, false);
-            Toast.makeText(context, "MobileData OK ;)" , Toast.LENGTH_LONG).show();
-            System.out.println("MobileData OK ;)");
-        } catch (ClassNotFoundException e) {
-            Toast.makeText(context, "MobileData ClassNotFoundException" , Toast.LENGTH_LONG).show();
-            System.out.println("MobileData ClassNotFoundException ;)");
-            e.printStackTrace();
-        } catch (NoSuchFieldException e) {
-            Toast.makeText(context, "MobileData NoSuchFieldException", Toast.LENGTH_LONG).show();
-            System.out.println("MobileData NoSuchFieldException ;)");
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            Toast.makeText(context, "MobileData IllegalAccessException", Toast.LENGTH_LONG).show();
-            System.out.println("MobileData IllegalAccessException ;)");
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            Toast.makeText(context, "MobileData NoSuchMethodException", Toast.LENGTH_LONG).show();
-            System.out.println("MobileData NoSuchMethodException ;)");
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            Toast.makeText(context, "MobileData InvocationTargetException", Toast.LENGTH_LONG).show();
-            System.out.println("MobileData InvocationTargetException ;)");
-            e.printStackTrace();
-        }*/
-        //NetworkUtils.mobileDataEnabled(context, false);
     }
 
     private void onTimerFinish() {
         if (wifiButton.isSelected())
             NetworkUtils.wifiEnabled(context, false);
-        if (mobileDataButton.isSelected())
-
         if (bluetoothButton.isSelected())
             NetworkUtils.bluetoothEnabled(false);
-
+        if (mobileDataButton.isSelected()) {} // TODO
+        if (airplanemodeButton.isSelected()) {} // TODO
     }
 
 }
