@@ -8,4 +8,16 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="Sheepzic"/>
+    <style name="Sheepzic.Component"/>
+
+    <style name="Sheepzic.Component.NumberPicker">
+        <item name="colorControlNormal">@android:color/transparent</item>
+        <item name="android:textSize">28sp</item>
+    </style>
+
+    <style name="Sheepzic.Component.NumberPickerDivider">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>
