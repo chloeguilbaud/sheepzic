@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Sheepzic</string>
+    <string name="component_timer_timeValueDivider">:</string>
     <string name="component_timePicker_numberPickerDivider">:</string>
 </resources>

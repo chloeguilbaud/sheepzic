@@ -20,4 +20,14 @@
         <item name="android:textSize">20sp</item>
         <item name="android:textStyle">bold</item>
     </style>
+
+    <style name="Sheepzic.Component.TimerValue">
+        <item name="android:textSize">25sp</item>
+    </style>
+
+    <style name="Sheepzic.Component.TimerValueDivider">
+        <item name="android:textSize">25sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>
