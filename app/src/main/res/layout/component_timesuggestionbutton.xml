@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <Button
+        android:id="@+id/component_timeSuggestionButton_button"
+        android:layout_width="70dp"
+        android:layout_height="40dp"
+        android:text="Coucou"
+        style="@style/Sheepzic.Component.TimeSuggestionButton" />
+</merge>
