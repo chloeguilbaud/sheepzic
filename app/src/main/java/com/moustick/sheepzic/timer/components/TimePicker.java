@@ -8,7 +8,9 @@ import android.widget.NumberPicker;
 
 import androidx.annotation.Nullable;
 
+import com.google.android.material.button.MaterialButton;
 import com.moustick.sheepzic.R;
+import com.moustick.sheepzic.timer.utils.TimeUtils;
 import com.moustick.sheepzic.utils.SuiteUtils;
 
 import static com.moustick.sheepzic.timer.components.Timer.maxHour;
@@ -101,6 +103,12 @@ public class TimePicker extends LinearLayout {
 
     public void setHours(int hour) {
         numberPickerHour.setValue(hour);
+    }
+
+    public void setTime(long millis) {
+        setHours(TimeUtils.toHours(millis));
+        setMinutes(TimeUtils.toMinutes(millis));
+        setSeconds(TimeUtils.toSeconds(millis));
     }
 
     public interface OnTimeChangeListener {

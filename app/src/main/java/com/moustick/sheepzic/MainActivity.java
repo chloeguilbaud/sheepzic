@@ -78,7 +78,10 @@ public class MainActivity extends AppCompatActivity {
                 findViewById(R.id.activity_main_timerPreferences_button4));
         ArrayList<Integer> timerPreferences = SettingsUtils.getTimerPreferences(context);
         for (int i = 0; i < prefButtons.size(); i++) {
-            prefButtons.get(i).setText(TimeUtils.format(timerPreferences.get(i)));
+            long millis = timerPreferences.get(i);
+            MaterialButton button = prefButtons.get(i);
+            button.setText(TimeUtils.format(millis));
+            button.setOnClickListener(v -> timePicker.setTime(millis));
         }
     }
 
