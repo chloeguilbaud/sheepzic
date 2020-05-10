@@ -22,6 +22,7 @@ import com.moustick.sheepzic.utils.ColorUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.view.View.*;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static java.util.Arrays.asList;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton playButton;
     private FloatingActionButton resetButton;
     private FloatingActionButton volumeButton;
+    private List<MaterialButton> timerPreferenceButtons;
 
     private Timer timer;
     private TimePicker timePicker;
@@ -57,6 +59,12 @@ public class MainActivity extends AppCompatActivity {
         playButton.setOnClickListener((v) -> onPlayButtonClick());
         resetButton.setOnClickListener((v) -> onResetButtonClick());
 
+        timerPreferenceButtons = asList(
+                findViewById(R.id.activity_main_timerPreferences_button1),
+                findViewById(R.id.activity_main_timerPreferences_button2),
+                findViewById(R.id.activity_main_timerPreferences_button3),
+                findViewById(R.id.activity_main_timerPreferences_button4));
+
         // Preference initialisation
         try {
             SetupUtils.initSettings(context);
@@ -71,15 +79,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void inflateTimerPreferences() {
-        List<MaterialButton> prefButtons = asList(
-                findViewById(R.id.activity_main_timerPreferences_button1),
-                findViewById(R.id.activity_main_timerPreferences_button2),
-                findViewById(R.id.activity_main_timerPreferences_button3),
-                findViewById(R.id.activity_main_timerPreferences_button4));
         ArrayList<Integer> timerPreferences = SettingsUtils.getTimerPreferences(context);
-        for (int i = 0; i < prefButtons.size(); i++) {
+        for (int i = 0; i < timerPreferenceButtons.size(); i++) {
             long millis = timerPreferences.get(i);
-            MaterialButton button = prefButtons.get(i);
+            MaterialButton button = timerPreferenceButtons.get(i);
             button.setText(TimeUtils.format(millis));
             button.setOnClickListener(v -> timePicker.setTime(millis));
         }
@@ -123,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void pause() {
         // Display play button
-        displayPlayableMode();
+        displayPausableMode();
         // If timer is on, then pause it
         if (timerOn) {
             pauseTimer();
@@ -168,6 +171,7 @@ public class MainActivity extends AppCompatActivity {
     private void displayInitMode() {
         displayDisabledPlayButton();
         enableReset(false);
+        enableTimerPreferencesButtons(true);
         timePicker.setVisibility(VISIBLE);
         timer.setVisibility(GONE);
     }
@@ -175,13 +179,18 @@ public class MainActivity extends AppCompatActivity {
     private void displayPlayableMode() {
         displayEnabledPlayButton();
         enableReset(true);
+        enableTimerPreferencesButtons(true);
         timePicker.setVisibility(VISIBLE);
         timer.setVisibility(GONE);
     }
 
     private void displayPausableMode() {
-        displayPauseButton();
+        if (play)
+            displayPauseButton();
+        else
+            displayEnabledPlayButton();
         enableReset(true);
+        enableTimerPreferencesButtons(false);
         timePicker.setVisibility(GONE);
         timer.setVisibility(VISIBLE);
     }
@@ -205,9 +214,16 @@ public class MainActivity extends AppCompatActivity {
             resetButton.setVisibility(VISIBLE);
             resetButton.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorWhite)));
         } else {
-            resetButton.setVisibility(View.GONE);
+            resetButton.setVisibility(GONE);
         }
         resetButton.setEnabled(enabled);
+    }
+
+    private void enableTimerPreferencesButtons(boolean enable) {
+        if (enable)
+            for (MaterialButton button : timerPreferenceButtons) button.setVisibility(VISIBLE);
+        else
+            for (MaterialButton button : timerPreferenceButtons) button.setVisibility(INVISIBLE);
     }
 
     private void setPlayButtonIcon(int iconRef, int iconColorRef, int backgroundColorRef) {

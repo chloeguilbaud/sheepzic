@@ -26,6 +26,8 @@ public class TimePicker extends LinearLayout {
     private NumberPicker numberPickerMin;
     private NumberPicker numberPickerSec;
 
+    private OnTimeChangeListener onTimeChangeListener;
+
     public TimePicker(Context context) {
         super(context);
     }
@@ -76,6 +78,7 @@ public class TimePicker extends LinearLayout {
     }
 
     public void setOnTimeChangeListener(OnTimeChangeListener onTimeChangeListener) {
+        this.onTimeChangeListener = onTimeChangeListener;
         numberPickerHour.setOnValueChangedListener((picker, oldVal, newVal) -> onTimeChangeListener.onTimeChange(oldVal, newVal));
         numberPickerMin.setOnValueChangedListener((picker, oldVal, newVal) -> onTimeChangeListener.onTimeChange(oldVal, newVal));
         numberPickerSec.setOnValueChangedListener((picker, oldVal, newVal) -> onTimeChangeListener.onTimeChange(oldVal, newVal));
@@ -94,14 +97,17 @@ public class TimePicker extends LinearLayout {
     }
 
     public void setSeconds(int second) {
+        onTimeChangeListener.onTimeChange(getSeconds(), second);
         numberPickerSec.setValue(second);
     }
 
     public void setMinutes(int minute) {
+        onTimeChangeListener.onTimeChange(getMinutes(), minute);
         numberPickerMin.setValue(minute);
     }
 
     public void setHours(int hour) {
+        onTimeChangeListener.onTimeChange(getHours(), hour);
         numberPickerHour.setValue(hour);
     }
 
