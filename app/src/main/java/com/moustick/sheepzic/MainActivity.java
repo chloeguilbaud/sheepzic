@@ -4,18 +4,27 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.moustick.sheepzic.components.TimePicker;
-import com.moustick.sheepzic.components.Timer;
-import com.moustick.sheepzic.utils.ColorHelper;
+import com.moustick.sheepzic.preferences.SettingsUtils;
+import com.moustick.sheepzic.preferences.SetupUtils;
+import com.moustick.sheepzic.timer.components.TimePicker;
+import com.moustick.sheepzic.timer.components.Timer;
+import com.moustick.sheepzic.timer.utils.TimeUtils;
+import com.moustick.sheepzic.utils.ColorUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
+import static java.util.Arrays.asList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -48,9 +57,29 @@ public class MainActivity extends AppCompatActivity {
         playButton.setOnClickListener((v) -> onPlayButtonClick());
         resetButton.setOnClickListener((v) -> onResetButtonClick());
 
+        // Preference initialisation
+        try {
+            SetupUtils.initSettings(context);
+        } catch (RuntimeException e) {
+            Log.e("MAIN ACTIVITY", e.getMessage()); //TODO to test
+        }
+
         // View initialisation
+        inflateTimerPreferences();
         init();
 
+    }
+
+    private void inflateTimerPreferences() {
+        List<MaterialButton> prefButtons = asList(
+                findViewById(R.id.activity_main_timerPreferences_button1),
+                findViewById(R.id.activity_main_timerPreferences_button2),
+                findViewById(R.id.activity_main_timerPreferences_button3),
+                findViewById(R.id.activity_main_timerPreferences_button4));
+        ArrayList<Integer> timerPreferences = SettingsUtils.getTimerPreferences(context);
+        for (int i = 0; i < prefButtons.size(); i++) {
+            prefButtons.get(i).setText(TimeUtils.format(timerPreferences.get(i)));
+        }
     }
 
     private void init() {
@@ -181,7 +210,7 @@ public class MainActivity extends AppCompatActivity {
     private void setPlayButtonIcon(int iconRef, int iconColorRef, int backgroundColorRef) {
         Drawable drawable = getResources().getDrawable(iconRef);
         playButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(backgroundColorRef)));
-        ColorHelper.setColor(context, iconColorRef, drawable);
+        ColorUtils.setColor(context, iconColorRef, drawable);
         playButton.setImageDrawable(drawable);
     }
 

@@ -1,4 +1,4 @@
-package com.moustick.sheepzic.components;
+package com.moustick.sheepzic.timer.components;
 
 import android.content.Context;
 import android.os.CountDownTimer;
@@ -11,7 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.moustick.sheepzic.R;
-import com.moustick.sheepzic.utils.SuiteHelper;
+import com.moustick.sheepzic.timer.utils.TimeUtils;
+import com.moustick.sheepzic.utils.SuiteUtils;
 
 // TODO - mettre en place du ViewModel et LiveData
 public class Timer extends LinearLayout {
@@ -73,9 +74,9 @@ public class Timer extends LinearLayout {
         secondsProgressBarView = findViewById(R.id.component_countDownTimer_progressbar_seconds);
 
         // Time initialisation
-        hours = SuiteHelper.generate(minHour, maxHour);
-        minutes = SuiteHelper.generate(minMinute, maxMinute);
-        seconds = SuiteHelper.generate(minSecond, maxSecond);
+        hours = SuiteUtils.generate(minHour, maxHour);
+        minutes = SuiteUtils.generate(minMinute, maxMinute);
+        seconds = SuiteUtils.generate(minSecond, maxSecond);
 
         init();
 
@@ -110,15 +111,15 @@ public class Timer extends LinearLayout {
         currentOnFinishListener = onFinishListener;
         updateView();
 
-        int countDownTimeMillis = currentSecond * 1000 + currentMinute * 60 * 1000 + currentHour * 60 * 60 * 1000;
+        int countDownTimeMillis = TimeUtils.toMillis(currentHour, currentMinute, currentSecond);
 
         // Creating Timer
         countDownTimer = new CountDownTimer(countDownTimeMillis, 1000) {
 
             public void onTick(long millisUntilFinished) { // Every second
-                currentSecond = (int) (millisUntilFinished / 1000) % 60;
-                currentMinute = (int) ((millisUntilFinished / (1000 * 60)) % 60);
-                currentHour = (int) ((millisUntilFinished / (1000 * 60 * 60)) % 24);
+                currentSecond = TimeUtils.toSeconds(millisUntilFinished);
+                currentMinute = TimeUtils.toMinutes(millisUntilFinished);
+                currentHour = TimeUtils.toHours(millisUntilFinished);
                 updateView();
             }
 

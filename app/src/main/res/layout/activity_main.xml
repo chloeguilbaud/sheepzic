@@ -22,7 +22,7 @@
         android:layout_height="match_parent"
         android:elevation="4dp">
 
-        <com.moustick.sheepzic.components.Timer
+        <com.moustick.sheepzic.timer.components.Timer
             android:id="@+id/activity_main_timer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.moustick.sheepzic.components.TimePicker
+        <com.moustick.sheepzic.timer.components.TimePicker
             android:id="@+id/activity_main_timePicker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
             app:backgroundTint="@android:color/transparent"
             app:elevation="0dp"
             app:fabCustomSize="48dp"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+            app:layout_constraintBottom_toTopOf="@+id/activity_main_timerPreferences"
             app:layout_constraintEnd_toStartOf="@+id/activity_main_playButton"
             app:maxImageSize="24dp"
             app:pressedTranslationZ="0dp" />
@@ -74,7 +74,7 @@
             android:src="@drawable/ic_play_arrow_normal"
             app:elevation="4dp"
             app:fabCustomSize="48dp"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+            app:layout_constraintBottom_toTopOf="@+id/activity_main_timerPreferences"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:maxImageSize="24dp"
@@ -82,13 +82,12 @@
             app:tint="@color/colorWhite" />
 
         <LinearLayout
-            android:id="@+id/linearLayout"
+            android:id="@+id/activity_main_timerPreferences"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="32dp"
-
             android:gravity="center"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -101,6 +100,7 @@
                 android:layout_weight="1">
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/activity_main_timerPreferences_button1"
                     style="@style/Sheepzic.Component.TimeSuggestionButton"
                     android:text="20 min"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -116,6 +116,7 @@
                 android:layout_weight="1">
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/activity_main_timerPreferences_button2"
                     style="@style/Sheepzic.Component.TimeSuggestionButton"
                     android:text="30 min"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -130,6 +131,7 @@
                 android:layout_weight="1">
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/activity_main_timerPreferences_button3"
                     style="@style/Sheepzic.Component.TimeSuggestionButton"
                     android:text="45 min"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -144,6 +146,7 @@
                 android:layout_weight="1">
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/activity_main_timerPreferences_button4"
                     style="@style/Sheepzic.Component.TimeSuggestionButton"
                     android:text="1 h"
                     app:layout_constraintBottom_toBottomOf="parent"
