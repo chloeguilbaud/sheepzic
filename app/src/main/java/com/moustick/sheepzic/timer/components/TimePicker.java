@@ -1,4 +1,4 @@
-package com.moustick.sheepzic.components;
+package com.moustick.sheepzic.timer.components;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -9,14 +9,14 @@ import android.widget.NumberPicker;
 import androidx.annotation.Nullable;
 
 import com.moustick.sheepzic.R;
-import com.moustick.sheepzic.utils.SuiteHelper;
+import com.moustick.sheepzic.utils.SuiteUtils;
 
-import static com.moustick.sheepzic.components.Timer.maxHour;
-import static com.moustick.sheepzic.components.Timer.maxMinute;
-import static com.moustick.sheepzic.components.Timer.maxSecond;
-import static com.moustick.sheepzic.components.Timer.minHour;
-import static com.moustick.sheepzic.components.Timer.minMinute;
-import static com.moustick.sheepzic.components.Timer.minSecond;
+import static com.moustick.sheepzic.timer.components.Timer.maxHour;
+import static com.moustick.sheepzic.timer.components.Timer.maxMinute;
+import static com.moustick.sheepzic.timer.components.Timer.maxSecond;
+import static com.moustick.sheepzic.timer.components.Timer.minHour;
+import static com.moustick.sheepzic.timer.components.Timer.minMinute;
+import static com.moustick.sheepzic.timer.components.Timer.minSecond;
 
 public class TimePicker extends LinearLayout {
 
@@ -59,7 +59,7 @@ public class TimePicker extends LinearLayout {
     }
 
     private void initNumberPicker(NumberPicker numberPicker, int min, int max) {
-        numberPicker.setDisplayedValues(SuiteHelper.generate(min, max));
+        numberPicker.setDisplayedValues(SuiteUtils.generate(min, max));
         numberPicker.setMinValue(min);
         numberPicker.setMaxValue(max - 1);
         numberPicker.setValue(min);

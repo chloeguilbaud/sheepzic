@@ -1,6 +1,6 @@
 package com.moustick.sheepzic.utils;
 
-public class SuiteHelper {
+public class SuiteUtils {
 
     public static String[] generate(int from, int to) {
         String[] data = new String[to];
