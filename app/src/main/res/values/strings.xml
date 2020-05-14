@@ -5,7 +5,7 @@
     <string name="component_timePicker_numberPickerDivider">:</string>
 
     <string name="component_preferences_switch_defaultLabel">Label</string>
-    <string name="activity_main_paramsButton_contentDescription">parameters</string>
+    <string name="activity_main_paramsButton_contentDescription">Parameter options button</string>
     <string name="activity_settings_whenTimerEnded_title">A la fin du compte à rebours</string>
     <string name="activity_settings_whenTimerEnded_turnOffWifi">Désactiver le Wifi</string>
     <string name="activity_settings_whenTimerEnded_turnOffBluetooth">Désactiver le Bluetooth</string>
