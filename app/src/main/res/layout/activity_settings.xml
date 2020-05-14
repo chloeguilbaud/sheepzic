@@ -22,27 +22,31 @@
             style="@style/Sheepzic.Component.Preferences.Title"/>
 
         <com.moustick.sheepzic.preferences.components.Switch
+            android:id="@+id/activity_settings_switch_whenTimerEnded_turnOffWifi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:switchLabel="@string/activity_settings_whenTimerEnded_wifi"
+            app:switchLabel="@string/activity_settings_whenTimerEnded_turnOffWifi"
             />
 
         <com.moustick.sheepzic.preferences.components.Switch
+            android:id="@+id/activity_settings_switch_whenTimerEnded_turnOffbluetooth"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:switchLabel="@string/activity_settings_whenTimerEnded_bluetooth"
+            app:switchLabel="@string/activity_settings_whenTimerEnded_turnOffBluetooth"
             />
 
         <com.moustick.sheepzic.preferences.components.Switch
+            android:id="@+id/activity_settings_switch_whenTimerEnded_lockPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:switchLabel="@string/activity_settings_whenTimerEnded_phoneLock"
+            app:switchLabel="@string/activity_settings_whenTimerEnded_lockPhone"
             />
 
         <com.moustick.sheepzic.preferences.components.Switch
+            android:id="@+id/activity_settings_switch_whenTimerEnded_turnOffPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:switchLabel="@string/activity_settings_whenTimerEnded_phoneOff"
+            app:switchLabel="@string/activity_settings_whenTimerEnded_turnOffPhone"
             />
 
     </LinearLayout>

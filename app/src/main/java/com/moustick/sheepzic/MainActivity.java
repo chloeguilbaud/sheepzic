@@ -13,8 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.moustick.sheepzic.preferences.ui.PreferencesUtils;
 import com.moustick.sheepzic.preferences.ui.SettingsUtils;
-import com.moustick.sheepzic.preferences.ui.SetupUtils;
 import com.moustick.sheepzic.preferences.utils.SettingsActivity;
 import com.moustick.sheepzic.timer.components.TimePicker;
 import com.moustick.sheepzic.timer.components.Timer;
@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Preference initialisation
         try {
-            SetupUtils.initSettings(context);
+            SettingsUtils.initSettings(context);
         } catch (RuntimeException e) {
             Log.e("MAIN ACTIVITY", e.getMessage()); //TODO to test
         }
@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
      ****************************/
 
     private void inflateTimerPreferences() {
-        ArrayList<Integer> timerPreferences = SettingsUtils.getTimerPreferences(context);
+        ArrayList<Integer> timerPreferences = PreferencesUtils.getTimerPreferences(context);
         for (int i = 0; i < timerPreferenceButtons.size(); i++) {
             long millis = timerPreferences.get(i);
             MaterialButton button = timerPreferenceButtons.get(i);

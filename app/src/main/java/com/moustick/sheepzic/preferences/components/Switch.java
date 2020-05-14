@@ -89,4 +89,12 @@ public class Switch extends ConstraintLayout {
         switchView.isChecked();
     }
 
+    public void setChecked(boolean check) {
+        switchView.setChecked(check);
+    }
+
+    public void setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener listener) {
+        switchView.setOnCheckedChangeListener(listener);
+    }
+
 }
