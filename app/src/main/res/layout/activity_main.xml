@@ -57,7 +57,7 @@
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="8dp"
             android:src="@drawable/ic_reset_normal"
-            android:visibility="gone"
+            android:visibility="visible"
             app:backgroundTint="@android:color/transparent"
             app:elevation="0dp"
             app:fabCustomSize="48dp"
@@ -80,6 +80,22 @@
             app:maxImageSize="24dp"
             app:pressedTranslationZ="0dp"
             app:tint="@color/colorWhite" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/activity_main_stopButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/ic_stop_normal"
+            android:visibility="gone"
+            app:backgroundTint="@android:color/transparent"
+            app:elevation="0dp"
+            app:fabCustomSize="48dp"
+            app:layout_constraintBottom_toTopOf="@+id/activity_main_timerPreferences"
+            app:layout_constraintStart_toEndOf="@+id/activity_main_playButton"
+            app:maxImageSize="24dp"
+            app:pressedTranslationZ="0dp" />
 
         <LinearLayout
             android:id="@+id/activity_main_timerPreferences"

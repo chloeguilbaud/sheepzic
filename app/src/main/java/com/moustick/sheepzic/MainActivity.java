@@ -5,7 +5,6 @@ import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,9 +30,9 @@ public class MainActivity extends AppCompatActivity {
 
     private Context context;
 
-    private FloatingActionButton playButton;
     private FloatingActionButton resetButton;
-    private FloatingActionButton volumeButton;
+    private FloatingActionButton playButton;
+    private FloatingActionButton stopButton;
     private List<MaterialButton> timerPreferenceButtons;
 
     private Timer timer;
@@ -51,13 +50,15 @@ public class MainActivity extends AppCompatActivity {
         timer = findViewById(R.id.activity_main_timer);
         timePicker = findViewById(R.id.activity_main_timePicker);
 
-        playButton = findViewById(R.id.activity_main_playButton);
         resetButton = findViewById(R.id.activity_main_resetButton);
+        playButton = findViewById(R.id.activity_main_playButton);
+        stopButton = findViewById(R.id.activity_main_stopButton);
 
         timePicker.setOnTimeChangeListener((oldValue, newValue) -> onTimeSelect());
 
-        playButton.setOnClickListener((v) -> onPlayButtonClick());
         resetButton.setOnClickListener((v) -> onResetButtonClick());
+        playButton.setOnClickListener((v) -> onPlayButtonClick());
+        stopButton.setOnClickListener((v) -> onStopButtonClick());
 
         timerPreferenceButtons = asList(
                 findViewById(R.id.activity_main_timerPreferences_button1),
@@ -140,20 +141,38 @@ public class MainActivity extends AppCompatActivity {
     private void reset() {
         // Stop timer and reset it
         resetTimer();
-        timerOn = false;
         // Reset time picker to zero
         timePicker.reset();
         // Reset initial screen
         init();
     }
 
+    private void onStopButtonClick() {
+        if (play) {
+            stop();
+        }
+    }
+
+    private void stop() {
+        // Pause timer
+        stopTimer();
+        timerOn = false;
+        play = false;
+        // Display playable mode
+        displayPlayableMode();
+    }
+
     private void startTimer() {
+        setTimer();
+        timer.start();
+        timerOn = true;
+    }
+
+    private void setTimer() {
         int hours = timePicker.getHours();
         int minutes = timePicker.getMinutes();
         int seconds = timePicker.getSeconds();
         timer.setTimer(hours, minutes, seconds, this::onTimerFinish);
-        timer.start();
-        timerOn = true;
     }
 
     private void pauseTimer() {
@@ -168,17 +187,23 @@ public class MainActivity extends AppCompatActivity {
         timer.reset();
     }
 
+    private void stopTimer() {
+        timer.stop();
+    }
+
     private void displayInitMode() {
-        displayDisabledPlayButton();
+        displayPlayButton(false);
         enableReset(false);
+        enableStop(false);
         enableTimerPreferencesButtons(true);
         timePicker.setVisibility(VISIBLE);
         timer.setVisibility(GONE);
     }
 
     private void displayPlayableMode() {
-        displayEnabledPlayButton();
+        displayPlayButton(true);
         enableReset(true);
+        enableStop(false);
         enableTimerPreferencesButtons(true);
         timePicker.setVisibility(VISIBLE);
         timer.setVisibility(GONE);
@@ -188,21 +213,20 @@ public class MainActivity extends AppCompatActivity {
         if (play)
             displayPauseButton();
         else
-            displayEnabledPlayButton();
+            displayPlayButton(true);
         enableReset(true);
+        enableStop(true);
         enableTimerPreferencesButtons(false);
         timePicker.setVisibility(GONE);
         timer.setVisibility(VISIBLE);
     }
 
-    private void displayDisabledPlayButton() {
-        playButton.setEnabled(false);
-        setPlayButtonIcon(R.drawable.ic_play_arrow_normal, R.color.colorGrey, R.color.colorLightGrey);
-    }
-
-    private void displayEnabledPlayButton() {
-        playButton.setEnabled(true);
-        setPlayButtonIcon(R.drawable.ic_play_arrow_normal, R.color.colorPrimary, R.color.colorWhite);
+    private void displayPlayButton(boolean enable) {
+        playButton.setEnabled(enable);
+        if (!enable)
+            setPlayButtonIcon(R.drawable.ic_play_arrow_normal, R.color.colorGrey, R.color.colorLightGrey);
+        else
+            setPlayButtonIcon(R.drawable.ic_play_arrow_normal, R.color.colorPrimary, R.color.colorWhite);
     }
 
     private void displayPauseButton() {
@@ -217,6 +241,16 @@ public class MainActivity extends AppCompatActivity {
             resetButton.setVisibility(GONE);
         }
         resetButton.setEnabled(enabled);
+    }
+
+    private void enableStop(boolean enabled) {
+        if (enabled) {
+            stopButton.setVisibility(VISIBLE);
+            stopButton.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorWhite)));
+        } else {
+            stopButton.setVisibility(GONE);
+        }
+        stopButton.setEnabled(enabled);
     }
 
     private void enableTimerPreferencesButtons(boolean enable) {

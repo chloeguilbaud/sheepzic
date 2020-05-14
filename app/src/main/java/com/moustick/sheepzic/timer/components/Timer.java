@@ -148,6 +148,15 @@ public class Timer extends LinearLayout {
         }
     }
 
+    public void reset() {
+        finish();
+        init();
+    }
+
+    public void stop() {
+        reset();
+    }
+
     public void finish() {
         if (countDownTimer != null) {
             countDownTimer.cancel();
@@ -175,11 +184,6 @@ public class Timer extends LinearLayout {
         else
             progressBar.setBackground(null);
 
-    }
-
-    public void reset() {
-        finish();
-        init();
     }
 
     public interface onFinishListener {
