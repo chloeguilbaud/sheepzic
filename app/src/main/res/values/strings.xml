@@ -2,6 +2,7 @@
     <string name="app_name">Sheepzic</string>
 
     <string name="component_timer_timeValueDivider">:</string>
+    <string name="component_timer_title">Fin du son dans</string>
     <string name="component_timePicker_numberPickerDivider">:</string>
 
     <string name="component_preferences_switch_defaultLabel">Label</string>

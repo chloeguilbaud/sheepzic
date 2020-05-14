@@ -55,41 +55,55 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:gravity="center"
+            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/component_countDownTimer_hours"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:theme="@style/Sheepzic.Component.TimerValue" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/component_timer_timeValueDivider"
+                android:text="@string/component_timer_title"
                 android:theme="@style/Sheepzic.Component.TimerValueDivider" />
 
-            <TextView
-                android:id="@+id/component_countDownTimer_minutes"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:theme="@style/Sheepzic.Component.TimerValue" />
+                android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/component_timer_timeValueDivider"
-                android:theme="@style/Sheepzic.Component.TimerValueDivider" />
+                <TextView
+                    android:id="@+id/component_countDownTimer_hours"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/Sheepzic.Component.TimerValue" />
 
-            <TextView
-                android:id="@+id/component_countDownTimer_seconds"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:theme="@style/Sheepzic.Component.TimerValue" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/component_timer_timeValueDivider"
+                    android:theme="@style/Sheepzic.Component.TimerValueDivider" />
+
+                <TextView
+                    android:id="@+id/component_countDownTimer_minutes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/Sheepzic.Component.TimerValue" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/component_timer_timeValueDivider"
+                    android:theme="@style/Sheepzic.Component.TimerValueDivider" />
+
+                <TextView
+                    android:id="@+id/component_countDownTimer_seconds"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/Sheepzic.Component.TimerValue" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
