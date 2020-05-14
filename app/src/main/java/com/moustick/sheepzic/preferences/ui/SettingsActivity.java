@@ -4,7 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
 
+import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.button.MaterialButton;
 import com.moustick.sheepzic.R;
 import com.moustick.sheepzic.preferences.components.Switch;
 import com.moustick.sheepzic.preferences.utils.PreferencesUtils;
@@ -12,6 +15,8 @@ import com.moustick.sheepzic.preferences.utils.PreferencesUtils;
 public class SettingsActivity extends AppCompatActivity {
 
     private Context context;
+
+    private MaterialToolbar toolbar;
 
     private Switch deactivateWifiSwitch;
     private Switch deactivateBluetoothSwitch;
@@ -23,6 +28,15 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         context = getApplicationContext();
+
+        toolbar = findViewById(R.id.activity_settings_toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
         deactivateWifiSwitch = findViewById(R.id.activity_settings_switch_whenTimerEnded_turnOffWifi);
         deactivateBluetoothSwitch = findViewById(R.id.activity_settings_switch_whenTimerEnded_turnOffbluetooth);

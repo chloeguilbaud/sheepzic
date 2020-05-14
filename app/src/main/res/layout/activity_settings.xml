@@ -6,49 +6,71 @@
     android:layout_height="match_parent"
     tools:context=".preferences.ui.SettingsActivity">
 
-    <LinearLayout
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/activity_settings_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:backgroundTint="@color/colorNightGreyDark"
+            app:title="@string/app_name"
+            app:navigationIcon="@drawable/ic_navigationback_normal"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:layout_marginTop="?attr/actionBarSize"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/activity_settings_whenTimerEnded_title"
-            style="@style/Sheepzic.Component.Preferences.Title"/>
-
-        <com.moustick.sheepzic.preferences.components.Switch
-            android:id="@+id/activity_settings_switch_whenTimerEnded_turnOffWifi"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:switchLabel="@string/activity_settings_whenTimerEnded_turnOffWifi"
-            />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <com.moustick.sheepzic.preferences.components.Switch
-            android:id="@+id/activity_settings_switch_whenTimerEnded_turnOffbluetooth"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:switchLabel="@string/activity_settings_whenTimerEnded_turnOffBluetooth"
-            />
+            <TextView
+                style="@style/Sheepzic.Component.Preferences.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/activity_settings_whenTimerEnded_title" />
 
-        <com.moustick.sheepzic.preferences.components.Switch
-            android:id="@+id/activity_settings_switch_whenTimerEnded_lockPhone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:switchLabel="@string/activity_settings_whenTimerEnded_lockPhone"
-            />
+            <com.moustick.sheepzic.preferences.components.Switch
+                android:id="@+id/activity_settings_switch_whenTimerEnded_turnOffWifi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:switchLabel="@string/activity_settings_whenTimerEnded_turnOffWifi" />
 
-        <com.moustick.sheepzic.preferences.components.Switch
-            android:id="@+id/activity_settings_switch_whenTimerEnded_turnOffPhone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:switchLabel="@string/activity_settings_whenTimerEnded_turnOffPhone"
-            />
+            <com.moustick.sheepzic.preferences.components.Switch
+                android:id="@+id/activity_settings_switch_whenTimerEnded_turnOffbluetooth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:switchLabel="@string/activity_settings_whenTimerEnded_turnOffBluetooth" />
 
-    </LinearLayout>
+            <com.moustick.sheepzic.preferences.components.Switch
+                android:id="@+id/activity_settings_switch_whenTimerEnded_lockPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:switchLabel="@string/activity_settings_whenTimerEnded_lockPhone" />
+
+            <com.moustick.sheepzic.preferences.components.Switch
+                android:id="@+id/activity_settings_switch_whenTimerEnded_turnOffPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:switchLabel="@string/activity_settings_whenTimerEnded_turnOffPhone" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
