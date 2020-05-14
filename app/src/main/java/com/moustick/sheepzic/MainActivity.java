@@ -21,8 +21,8 @@ import com.moustick.sheepzic.utils.ColorUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.view.View.*;
 import static android.view.View.GONE;
+import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
 import static java.util.Arrays.asList;
 
@@ -75,9 +75,16 @@ public class MainActivity extends AppCompatActivity {
 
         // View initialisation
         inflateTimerPreferences();
+        initSecondaryButtons();
+
         init();
 
     }
+
+
+    /****************************
+     *      Initialisation
+     ****************************/
 
     private void inflateTimerPreferences() {
         ArrayList<Integer> timerPreferences = SettingsUtils.getTimerPreferences(context);
@@ -89,34 +96,59 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void initSecondaryButtons() {
+        resetButton.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorWhite)));
+        stopButton.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorWhite)));
+    }
+
     private void init() {
-        displayInitMode();
+        displayInitialView();
         timerOn = false;
         play = false;
     }
 
+
+    /****************************
+     *      User actions
+     ****************************/
+
     private void onTimeSelect() {
         if (timePicker.hasValue()) {
-            displayPlayableMode();
+            displayPlayableView();
         } else {
-            displayInitMode();
+            displayInitialView();
         }
+    }
+
+    private void onResetButtonClick() {
+        reset();
     }
 
     private void onPlayButtonClick() {
         if (timePicker.hasValue()) {
-            play = !play;
-            if (play) { // Start the count down countDownTimer
+            if (!play) { // Start the count down countDownTimer
                 play();
             } else { // Pause the countDownTimer
                 pause();
             }
+            play = !play;
         }
     }
 
+    private void onStopButtonClick() {
+        if (play) {
+            stop();
+        }
+    }
+
+
+    /****************************
+     *          Actions
+     ****************************/
+
     private void play() {
         // Display pausable mode
-        displayPausableMode();
+        displayPlayingView();
         // Manage timer
         if (!timerOn) { // Start timer if it is off
             startTimer();
@@ -127,15 +159,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void pause() {
         // Display play button
-        displayPausableMode();
+        displayPlayingView();
         // If timer is on, then pause it
         if (timerOn) {
             pauseTimer();
         }
-    }
-
-    private void onResetButtonClick() {
-        reset();
     }
 
     private void reset() {
@@ -147,20 +175,19 @@ public class MainActivity extends AppCompatActivity {
         init();
     }
 
-    private void onStopButtonClick() {
-        if (play) {
-            stop();
-        }
-    }
-
     private void stop() {
         // Pause timer
         stopTimer();
         timerOn = false;
         play = false;
         // Display playable mode
-        displayPlayableMode();
+        displayPlayableView();
     }
+
+
+    /****************************
+     *      Timer actions
+     ****************************/
 
     private void startTimer() {
         setTimer();
@@ -191,32 +218,47 @@ public class MainActivity extends AppCompatActivity {
         timer.stop();
     }
 
-    private void displayInitMode() {
+    private void onTimerFinish() {
+        Toast.makeText(context, "END", Toast.LENGTH_SHORT).show();
+        /*if (wifiButton.isSelected())
+            NetworkUtils.wifiEnabled(context, false);
+        if (bluetoothButton.isSelected())
+            NetworkUtils.bluetoothEnabled(false);
+        if (mobileDataButton.isSelected()) {} // TODO
+        if (airplanemodeButton.isSelected()) {} // TODO*/
+    }
+
+
+    /****************************
+     *      Display views
+     ****************************/
+
+    private void displayInitialView() {
         displayPlayButton(false);
-        enableReset(false);
-        enableStop(false);
-        enableTimerPreferencesButtons(true);
+        displayResetButton(false);
+        displayStopButton(false);
+        displayTimerPreferencesButtons(true);
         timePicker.setVisibility(VISIBLE);
         timer.setVisibility(GONE);
     }
 
-    private void displayPlayableMode() {
+    private void displayPlayableView() {
         displayPlayButton(true);
-        enableReset(true);
-        enableStop(false);
-        enableTimerPreferencesButtons(true);
+        displayResetButton(true);
+        displayStopButton(false);
+        displayTimerPreferencesButtons(true);
         timePicker.setVisibility(VISIBLE);
         timer.setVisibility(GONE);
     }
 
-    private void displayPausableMode() {
+    private void displayPlayingView() {
         if (play)
             displayPauseButton();
         else
             displayPlayButton(true);
-        enableReset(true);
-        enableStop(true);
-        enableTimerPreferencesButtons(false);
+        displayResetButton(true);
+        displayStopButton(true);
+        displayTimerPreferencesButtons(false);
         timePicker.setVisibility(GONE);
         timer.setVisibility(VISIBLE);
     }
@@ -233,27 +275,24 @@ public class MainActivity extends AppCompatActivity {
         setPlayButtonIcon(R.drawable.ic_pause_normal, R.color.colorPrimary, R.color.colorWhite);
     }
 
-    private void enableReset(boolean enabled) {
-        if (enabled) {
-            resetButton.setVisibility(VISIBLE);
-            resetButton.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorWhite)));
-        } else {
-            resetButton.setVisibility(GONE);
-        }
-        resetButton.setEnabled(enabled);
+    private void displayResetButton(boolean enable) {
+        displaySecondaryButton(resetButton, enable);
     }
 
-    private void enableStop(boolean enabled) {
-        if (enabled) {
-            stopButton.setVisibility(VISIBLE);
-            stopButton.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorWhite)));
-        } else {
-            stopButton.setVisibility(GONE);
-        }
-        stopButton.setEnabled(enabled);
+    private void displayStopButton(boolean enable) {
+        displaySecondaryButton(stopButton, enable);
     }
 
-    private void enableTimerPreferencesButtons(boolean enable) {
+    private void displaySecondaryButton(FloatingActionButton button, boolean enable) {
+        if (enable) {
+            button.setVisibility(VISIBLE);
+        } else {
+            button.setVisibility(GONE);
+        }
+        button.setEnabled(enable);
+    }
+
+    private void displayTimerPreferencesButtons(boolean enable) {
         if (enable)
             for (MaterialButton button : timerPreferenceButtons) button.setVisibility(VISIBLE);
         else
@@ -265,16 +304,6 @@ public class MainActivity extends AppCompatActivity {
         playButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(backgroundColorRef)));
         ColorUtils.setColor(context, iconColorRef, drawable);
         playButton.setImageDrawable(drawable);
-    }
-
-    private void onTimerFinish() {
-        Toast.makeText(context, "END", Toast.LENGTH_SHORT).show();
-        /*if (wifiButton.isSelected())
-            NetworkUtils.wifiEnabled(context, false);
-        if (bluetoothButton.isSelected())
-            NetworkUtils.bluetoothEnabled(false);
-        if (mobileDataButton.isSelected()) {} // TODO
-        if (airplanemodeButton.isSelected()) {} // TODO*/
     }
 
 }
