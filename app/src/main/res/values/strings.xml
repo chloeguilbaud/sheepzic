@@ -1,6 +1,15 @@
 <resources>
     <string name="app_name">Sheepzic</string>
+
     <string name="component_timer_timeValueDivider">:</string>
     <string name="component_timePicker_numberPickerDivider">:</string>
+
     <string name="activity_main_params">parameters</string>
+    <string name="activity_settings_whenTimerEnded_wifi">Désactiver le Wifi</string>
+    <string name="activity_settings_whenTimerEnded_title">A la fin du compte à rebours</string>
+    <string name="activity_settings_whenTimerEnded_bluetooth">Désactiver le Bluetooth</string>
+    <string name="activity_settings_whenTimerEnded_phoneLock">Vérouiller le téléphone</string>
+    <string name="activity_settings_whenTimerEnded_phoneOff">Eteindre le téléphone</string>
+    <string name="component_preferences_switch_defaultLabel">Label</string>
+
 </resources>

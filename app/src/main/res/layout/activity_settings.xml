@@ -6,13 +6,45 @@
     android:layout_height="match_parent"
     tools:context=".preferences.utils.SettingsActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="kikou"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_settings_whenTimerEnded_title"
+            style="@style/Sheepzic.Component.Preferences.Title"/>
+
+        <com.moustick.sheepzic.preferences.components.Switch
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:switchLabel="@string/activity_settings_whenTimerEnded_wifi"
+            />
+
+        <com.moustick.sheepzic.preferences.components.Switch
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:switchLabel="@string/activity_settings_whenTimerEnded_bluetooth"
+            />
+
+        <com.moustick.sheepzic.preferences.components.Switch
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:switchLabel="@string/activity_settings_whenTimerEnded_phoneLock"
+            />
+
+        <com.moustick.sheepzic.preferences.components.Switch
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:switchLabel="@string/activity_settings_whenTimerEnded_phoneOff"
+            />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

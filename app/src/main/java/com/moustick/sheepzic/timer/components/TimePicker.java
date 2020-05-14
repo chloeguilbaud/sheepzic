@@ -8,7 +8,6 @@ import android.widget.NumberPicker;
 
 import androidx.annotation.Nullable;
 
-import com.google.android.material.button.MaterialButton;
 import com.moustick.sheepzic.R;
 import com.moustick.sheepzic.timer.utils.TimeUtils;
 import com.moustick.sheepzic.utils.SuiteUtils;
@@ -46,7 +45,7 @@ public class TimePicker extends LinearLayout {
 
         // View initialisation
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.component_timepicker, this);
+        inflater.inflate(R.layout.component_timer_timepicker, this);
 
         numberPickerHour = findViewById(R.id.component_timePicker_numberPicker_hours);
         numberPickerMin = findViewById(R.id.component_timePicker_numberPicker_minutes);

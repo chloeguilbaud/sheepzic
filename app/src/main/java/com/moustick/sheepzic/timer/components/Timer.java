@@ -63,7 +63,7 @@ public class Timer extends LinearLayout {
 
         // View initialisation
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.component_timer, this);
+        inflater.inflate(R.layout.component_timer_timer, this);
 
         hoursValueView = findViewById(R.id.component_countDownTimer_hours);
         minutesValueView = findViewById(R.id.component_countDownTimer_minutes);

@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#073B60</color>
+    <color name="colorPrimary">#197BC0</color>
     <color name="colorPrimaryDark">#073B60</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorAccent">#4EB8CE</color>
+
+    <color name="colorPrimaryNightDark">#2F3136</color>
+    <color name="colorPrimaryNightLight">#393C42</color>
+    <color name="colorPrimaryNightText">@color/colorNightGreyLight</color>
 
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlack">#000000</color>
     <color name="colorGrey">#E0E0E0</color>
-    <color name="colorLightGrey">#F2F2F2</color>
+    <color name="colorGreyLight">#F2F2F2</color>
+    <color name="colorNightGreyLight">#B9BBBE</color>
+    <color name="colorNightGreyDark">#72767D</color>
 
     <color name="colorTimeSuggestionButtonBackground">#21000000</color>
 
