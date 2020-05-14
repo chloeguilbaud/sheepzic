@@ -1,18 +1,24 @@
 package com.moustick.sheepzic;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatImageView;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.moustick.sheepzic.preferences.SettingsUtils;
-import com.moustick.sheepzic.preferences.SetupUtils;
+import com.moustick.sheepzic.preferences.ui.SettingsUtils;
+import com.moustick.sheepzic.preferences.ui.SetupUtils;
+import com.moustick.sheepzic.preferences.utils.SettingsActivity;
 import com.moustick.sheepzic.timer.components.TimePicker;
 import com.moustick.sheepzic.timer.components.Timer;
 import com.moustick.sheepzic.timer.utils.TimeUtils;
@@ -47,12 +53,24 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         context = getApplicationContext();
 
+        // Getting view elements
+
+        ImageButton paramsButton = findViewById(R.id.activity_main_params);
+
         timer = findViewById(R.id.activity_main_timer);
         timePicker = findViewById(R.id.activity_main_timePicker);
 
         resetButton = findViewById(R.id.activity_main_resetButton);
         playButton = findViewById(R.id.activity_main_playButton);
         stopButton = findViewById(R.id.activity_main_stopButton);
+
+
+        // Reacting to user actions
+
+        paramsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(context, SettingsActivity.class);
+            startActivity(intent);
+        });
 
         timePicker.setOnTimeChangeListener((oldValue, newValue) -> onTimeSelect());
 
@@ -65,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
                 findViewById(R.id.activity_main_timerPreferences_button2),
                 findViewById(R.id.activity_main_timerPreferences_button3),
                 findViewById(R.id.activity_main_timerPreferences_button4));
+
 
         // Preference initialisation
         try {
