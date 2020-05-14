@@ -13,13 +13,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.moustick.sheepzic.preferences.ui.PreferencesUtils;
-import com.moustick.sheepzic.preferences.ui.SettingsUtils;
-import com.moustick.sheepzic.preferences.utils.SettingsActivity;
+import com.moustick.sheepzic.preferences.utils.PreferencesUtils;
+import com.moustick.sheepzic.preferences.utils.SettingsUtils;
+import com.moustick.sheepzic.preferences.ui.SettingsActivity;
 import com.moustick.sheepzic.timer.components.TimePicker;
 import com.moustick.sheepzic.timer.components.Timer;
 import com.moustick.sheepzic.timer.utils.TimeUtils;
 import com.moustick.sheepzic.utils.ColorUtils;
+import com.moustick.sheepzic.utils.NetworkUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -235,6 +236,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void onTimerFinish() {
+        if (PreferencesUtils.getOnTimerFinishTurnOffWifi(context))
+            NetworkUtils.wifiEnabled(context, false);
+        if (PreferencesUtils.getOnTimerFinishTurnOffBluetooth(context))
+            NetworkUtils.bluetoothEnabled(false);
+        
         Toast.makeText(context, "END", Toast.LENGTH_SHORT).show();
         /*if (wifiButton.isSelected())
             NetworkUtils.wifiEnabled(context, false);

@@ -1,4 +1,4 @@
-package com.moustick.sheepzic.preferences.ui;
+package com.moustick.sheepzic.preferences.utils;
 
 import android.content.Context;
 

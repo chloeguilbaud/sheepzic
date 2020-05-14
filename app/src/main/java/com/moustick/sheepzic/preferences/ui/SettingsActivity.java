@@ -1,4 +1,4 @@
-package com.moustick.sheepzic.preferences.utils;
+package com.moustick.sheepzic.preferences.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,7 +7,7 @@ import android.os.Bundle;
 
 import com.moustick.sheepzic.R;
 import com.moustick.sheepzic.preferences.components.Switch;
-import com.moustick.sheepzic.preferences.ui.PreferencesUtils;
+import com.moustick.sheepzic.preferences.utils.PreferencesUtils;
 
 public class SettingsActivity extends AppCompatActivity {
 
