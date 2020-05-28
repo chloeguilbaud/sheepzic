@@ -1,4 +1,4 @@
-package com.moustick.sheepzic.utils;
+package com.moustick.sheepzic.utils.device;
 
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
@@ -6,7 +6,7 @@ import android.net.wifi.WifiManager;
 
 public class NetworkUtils {
 
-    public static boolean wifiEnabled(Context context, boolean enable) {
+    public static boolean turnOffWifi(Context context) {
         WifiManager wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         if (wifiManager != null) {
             wifiManager.setWifiEnabled(false);
@@ -16,13 +16,9 @@ public class NetworkUtils {
         }
     }
 
-    public static boolean bluetoothEnabled(boolean enabled) {
+    public static boolean turnOffBluetooth() {
         BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
-        if (enabled) {
-            return adapter.enable();
-        } else {
-            return adapter.disable();
-        }
+        return adapter.disable();
     }
 
 }

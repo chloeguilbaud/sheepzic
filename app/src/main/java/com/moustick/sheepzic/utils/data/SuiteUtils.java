@@ -1,4 +1,4 @@
-package com.moustick.sheepzic.utils;
+package com.moustick.sheepzic.utils.data;
 
 public class SuiteUtils {
 

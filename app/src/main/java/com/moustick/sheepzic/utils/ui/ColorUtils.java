@@ -1,4 +1,4 @@
-package com.moustick.sheepzic.utils;
+package com.moustick.sheepzic.utils.ui;
 
 import android.content.Context;
 import android.graphics.PorterDuff;

@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 
 import com.moustick.sheepzic.R;
 import com.moustick.sheepzic.timer.utils.TimeUtils;
-import com.moustick.sheepzic.utils.SuiteUtils;
+import com.moustick.sheepzic.utils.data.SuiteUtils;
 
 // TODO - mettre en place du ViewModel et LiveData
 public class Timer extends LinearLayout {

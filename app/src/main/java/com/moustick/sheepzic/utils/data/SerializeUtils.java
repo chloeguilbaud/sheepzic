@@ -1,4 +1,4 @@
-package com.moustick.sheepzic.utils;
+package com.moustick.sheepzic.utils.data;
 
 import androidx.annotation.Nullable;
 

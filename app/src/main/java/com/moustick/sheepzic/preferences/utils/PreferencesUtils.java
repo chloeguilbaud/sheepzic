@@ -3,7 +3,7 @@ package com.moustick.sheepzic.preferences.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.moustick.sheepzic.utils.SerializeUtils;
+import com.moustick.sheepzic.utils.data.SerializeUtils;
 
 import java.util.ArrayList;
 
@@ -97,19 +97,19 @@ public class PreferencesUtils {
         putBoolean(context, SHEEPZIC_KEY_ON_TIMER_FINISH_DEACTIVATE_BLUETOOTH, value);
     }
 
-    public static boolean getOnTimerFinishTurnOffPhone(Context context) {
+    public static boolean getOnTimerFinishTurnOffDevice(Context context) {
         return getBoolean(context, SHEEPZIC_KEY_ON_TIMER_FINISH_TURN_OFF_PHONE, SettingsUtils.DEFAULT_ON_TIMER_FINISH_TURN_OFF_PHONE);
     }
 
-    public static void updateOnTimerFinishTurnOffPhone(Context context, boolean value) {
+    public static void updateOnTimerFinishTurnOffDevice(Context context, boolean value) {
         putBoolean(context, SHEEPZIC_KEY_ON_TIMER_FINISH_TURN_OFF_PHONE, value);
     }
 
-    public static boolean getOnTimerFinishLockPhone(Context context) {
+    public static boolean getOnTimerFinishLockDevice(Context context) {
         return getBoolean(context, SHEEPZIC_KEY_ON_TIMER_FINISH_LOCK_PHONE, SettingsUtils.DEFAULT_ON_TIMER_FINISH_LOCK_PHONE);
     }
 
-    public static void updateOnTimerFinishLockPhone(Context context, boolean value) {
+    public static void updateOnTimerFinishLockDevice(Context context, boolean value) {
         putBoolean(context, SHEEPZIC_KEY_ON_TIMER_FINISH_LOCK_PHONE, value);
     }
 

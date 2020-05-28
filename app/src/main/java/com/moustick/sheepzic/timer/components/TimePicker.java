@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 
 import com.moustick.sheepzic.R;
 import com.moustick.sheepzic.timer.utils.TimeUtils;
-import com.moustick.sheepzic.utils.SuiteUtils;
+import com.moustick.sheepzic.utils.data.SuiteUtils;
 
 import static com.moustick.sheepzic.timer.components.Timer.maxHour;
 import static com.moustick.sheepzic.timer.components.Timer.maxMinute;
