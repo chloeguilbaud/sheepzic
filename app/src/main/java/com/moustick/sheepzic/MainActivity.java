@@ -19,8 +19,8 @@ import com.moustick.sheepzic.preferences.ui.SettingsActivity;
 import com.moustick.sheepzic.timer.components.TimePicker;
 import com.moustick.sheepzic.timer.components.Timer;
 import com.moustick.sheepzic.timer.utils.TimeUtils;
-import com.moustick.sheepzic.utils.ColorUtils;
-import com.moustick.sheepzic.utils.NetworkUtils;
+import com.moustick.sheepzic.utils.ui.ColorUtils;
+import com.moustick.sheepzic.utils.device.network.NetworkUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -237,15 +237,15 @@ public class MainActivity extends AppCompatActivity {
 
     private void onTimerFinish() {
         if (PreferencesUtils.getOnTimerFinishTurnOffWifi(context))
-            NetworkUtils.wifiEnabled(context, false);
+            NetworkUtils.turnOffWifi(context);
         if (PreferencesUtils.getOnTimerFinishTurnOffBluetooth(context))
-            NetworkUtils.bluetoothEnabled(false);
-        
+            NetworkUtils.turnOffBluetooth();
+
         Toast.makeText(context, "END", Toast.LENGTH_SHORT).show();
         /*if (wifiButton.isSelected())
-            NetworkUtils.wifiEnabled(context, false);
+            NetworkUtils.turnOffWifi(context, false);
         if (bluetoothButton.isSelected())
-            NetworkUtils.bluetoothEnabled(false);
+            NetworkUtils.turnOffBluetooth(false);
         if (mobileDataButton.isSelected()) {} // TODO
         if (airplanemodeButton.isSelected()) {} // TODO*/
     }

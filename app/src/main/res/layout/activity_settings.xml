@@ -58,16 +58,17 @@
                 app:switchLabel="@string/activity_settings_whenTimerEnded_turnOffBluetooth" />
 
             <com.moustick.sheepzic.preferences.components.Switch
-                android:id="@+id/activity_settings_switch_whenTimerEnded_lockPhone"
+                android:id="@+id/activity_settings_switch_whenTimerEnded_lockDevice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:switchLabel="@string/activity_settings_whenTimerEnded_lockPhone" />
+                app:switchChecked="false"
+                app:switchLabel="@string/activity_settings_whenTimerEnded_lockDevice" />
 
             <com.moustick.sheepzic.preferences.components.Switch
-                android:id="@+id/activity_settings_switch_whenTimerEnded_turnOffPhone"
+                android:id="@+id/activity_settings_switch_whenTimerEnded_turnOffDevice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:switchLabel="@string/activity_settings_whenTimerEnded_turnOffPhone" />
+                app:switchLabel="@string/activity_settings_whenTimerEnded_turnOffDevice" />
 
         </LinearLayout>
 

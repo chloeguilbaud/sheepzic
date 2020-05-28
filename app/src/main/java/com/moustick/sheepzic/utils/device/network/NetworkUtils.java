@@ -1,4 +1,4 @@
-package com.moustick.sheepzic.utils.device;
+package com.moustick.sheepzic.utils.device.network;
 
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;

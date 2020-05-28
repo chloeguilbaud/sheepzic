@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">Sheepzic</string>
 
+    <string name="settings_lockDevice_rights">Pour permettre le vérouillage du téléphone à la fin du compte à rebours, vous devez authorisé l\'accès à Sheepzic</string>
+    <string name="settings_lockDevice_rights_enabled">Droit de vérouillage du téléphone activé</string>
+    <string name="settings_lockDevice_rights_disabled">Droit de vérouillage du téléphone desactivé</string>
+    <string name="settings_lockDevice_rights_canceled">Sans cet accord, le téléphone ne pourra être vérouillé à la fin du compte à rebours</string>
+
     <string name="component_timer_timeValueDivider">:</string>
     <string name="component_timer_title">Fin du son dans</string>
     <string name="component_timePicker_numberPickerDivider">:</string>
@@ -10,7 +15,7 @@
     <string name="activity_settings_whenTimerEnded_title">A la fin du compte à rebours</string>
     <string name="activity_settings_whenTimerEnded_turnOffWifi">Désactiver le Wifi</string>
     <string name="activity_settings_whenTimerEnded_turnOffBluetooth">Désactiver le Bluetooth</string>
-    <string name="activity_settings_whenTimerEnded_lockPhone">Vérouiller le téléphone</string>
-    <string name="activity_settings_whenTimerEnded_turnOffPhone">Eteindre le téléphone</string>
+    <string name="activity_settings_whenTimerEnded_lockDevice">Vérouiller le téléphone</string>
+    <string name="activity_settings_whenTimerEnded_turnOffDevice">Eteindre le téléphone</string>
 
 </resources>
